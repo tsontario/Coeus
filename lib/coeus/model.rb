@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'yaml'
 
 require_relative 'state'
@@ -14,16 +15,8 @@ module Coeus
 
       def from_yaml(yaml)
         # TODO: schema validate
-        states = (yaml.dig('states') || []).map do |s|
-          State.new(
-            name: s['name'],
-            atoms: (s['atoms'] || []).map { |a| Atom.new(a) },
-            initial: s['initial']
-          )
-        end
-        transitions = (yaml.dig('transitions') || []).map do |t|
-          Transition.new(from: t['from'], to: t['to'])
-        end
+        states = (yaml['states'] || []).map { |s| State.from_yaml(s) }
+        transitions = (yaml['transitions'] || []).map { |t| Transition.from_yaml(t, states) }
         new(states: states, transitions: transitions)
       end
     end

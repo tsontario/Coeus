@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Coeus
+  # Atom represents a predicate value that is considered true when present in a State object
   class Atom
     attr_reader :value
+
     def initialize(value)
       @value = value
     end

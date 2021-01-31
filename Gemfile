@@ -8,4 +8,4 @@ gem 'rspec', '~> 3.10'
 
 gem 'rubocop', '~> 1.9'
 
-gem "byebug", "~> 11.1"
+gem 'byebug', '~> 11.1'

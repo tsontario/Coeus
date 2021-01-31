@@ -3,6 +3,15 @@
 module Coeus
   # Represents a single state in the model
   class State
+    class << self
+      def from_yaml(yaml)
+        new(
+          name: yaml['name'],
+          atoms: (yaml['atoms'] || []).map { |a| Atom.new(a) },
+          initial: yaml['initial']
+        )
+      end
+    end
     attr_reader :name, :atoms
 
     def initialize(name:, atoms:, initial: false)
@@ -18,8 +27,8 @@ module Coeus
     # TODO: test
     def ==(other)
       name == other.name &&
-      atoms == other.atoms &&
-      initial_state? == other.initial_state?
+        atoms.sort == other.atoms.sort &&
+        initial_state? == other.initial_state?
     end
   end
 end
