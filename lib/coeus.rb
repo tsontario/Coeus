@@ -1,0 +1,2 @@
+module Coeus
+end
