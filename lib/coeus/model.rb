@@ -7,12 +7,12 @@ module Coeus
     def initialize(states:, transitions:, labels: {})
       @states = states
       @transitions = transitions
-      @labels = labels
+      @labels = labels # Might not need this explicitly... the labelling function is the sat formula for the given CTL expression
     end
 
     # sat determines the set of states that satisfy formula
     def sat(formula)
-      
+      # TODO implement CTL algorithm
     end
   end
 end
