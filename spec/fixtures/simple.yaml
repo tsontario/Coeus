@@ -1,0 +1,13 @@
+states:
+  - name: s0
+    atoms:
+      - a
+    initial: true
+  - name: s1
+    atoms:
+      - b
+transitions:
+  - from: s0
+    to: s1
+  - from: s1
+    to: s0
