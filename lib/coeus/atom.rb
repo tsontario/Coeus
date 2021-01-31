@@ -2,5 +2,14 @@
 
 module Coeus
   class Atom
+    attr_reader :value
+    def initialize(value)
+      @value = value
+    end
+
+    # TODO: test
+    def ==(other)
+      value == other.value
+    end
   end
 end

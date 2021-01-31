@@ -3,6 +3,7 @@ require 'yaml'
 
 require_relative 'state'
 require_relative 'transition'
+require_relative 'atom'
 module Coeus
   # The Model class contains a collection of items which, taken together, define a transition system.
   # In particular, it contains a set of states, a set of transitions _between_ states, and a set of labels
@@ -15,14 +16,15 @@ module Coeus
         # TODO: schema validate
         states = (yaml.dig('states') || []).map do |s|
           State.new(
-            name: s[:name],
-            atoms: (s[:atoms] || []).map { |a| Atom.new(a) }
+            name: s['name'],
+            atoms: (s['atoms'] || []).map { |a| Atom.new(a) },
+            initial: s['initial']
           )
         end
         transitions = (yaml.dig('transitions') || []).map do |t|
-          Transition.new(from: t[:from], to: t[:to])
+          Transition.new(from: t['from'], to: t['to'])
         end
-        new(states: states)
+        new(states: states, transitions: transitions)
       end
     end
 
