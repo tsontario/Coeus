@@ -1,16 +1,36 @@
 # frozen_string_literal: true
+require 'yaml'
 
+require_relative 'state'
+require_relative 'transition'
 module Coeus
   # The Model class contains a collection of items which, taken together, define a transition system.
   # In particular, it contains a set of states, a set of transitions _between_ states, and a set of labels
   class Model
-    attr_reader :states, :transitions, :labels
+    class << self
+      # Do not allow Model instances to be created directly
+      private_class_method :new
 
-    def initialize(states:, transitions:, labels: {})
+      def from_yaml(yaml)
+        # TODO: schema validate
+        states = (yaml.dig('states') || []).map do |s|
+          State.new(
+            name: s[:name],
+            atoms: (s[:atoms] || []).map { |a| Atom.new(a) }
+          )
+        end
+        transitions = (yaml.dig('transitions') || []).map do |t|
+          Transition.new(from: t[:from], to: t[:to])
+        end
+        new(states: states)
+      end
+    end
+
+    attr_reader :states, :transitions
+
+    def initialize(states:, transitions:)
       @states = states
       @transitions = transitions
-      # Might not need this explicitly... the labelling function is the sat formula for the given CTL expression
-      @labels = labels
     end
 
     # sat determines the set of states that satisfy formula
