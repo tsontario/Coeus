@@ -49,4 +49,20 @@ describe Coeus::Labelling do
       expect(s2_labelling.labels).to contain_exactly(and_node, a_node, b_node)
     end
   end
+
+  context 'when evaluating NOT nodes' do
+    it 'labels only s1 with state NOT a' do
+      yaml = YAML.load_file("#{TestHelper.fixture_path}/simple.yaml")
+      model = Coeus::Model.from_yaml(yaml)
+      labelling = described_class.new(model)
+      a_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
+      not_node = Coeus::ParseTree::Not.new(child: a_node)
+      parse_tree = Coeus::ParseTree.new(not_node)
+      labelling.sat(parse_tree)
+      s0_labelling = labelling.for('s0')
+      s1_labelling = labelling.for('s1')
+      expect(s0_labelling.labels).to contain_exactly(a_node)
+      expect(s1_labelling.labels).to contain_exactly(not_node)
+    end
+  end
 end

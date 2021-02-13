@@ -41,7 +41,9 @@ module Coeus
 
     # A node with only a single child
     class UnaryNode < Node
-      def initialize(child:, parent:)
+      attr_reader :child
+
+      def initialize(child:, parent: nil)
         super(parent: parent)
         @child = child
       end
