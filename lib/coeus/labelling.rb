@@ -23,6 +23,10 @@ module Coeus
       def labels
         @labels ||= []
       end
+
+      def has_label?(label)
+        labels.include?(label)
+      end
     end
 
     def initialize(model)
