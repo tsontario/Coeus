@@ -4,10 +4,6 @@ module Coeus
   class ParseTree
     # Abstract base class
     class Node
-      def initialize(parent: nil)
-        @parent = parent
-      end
-
       def sat(labelling)
         raise NotImplementedError
       end
@@ -15,10 +11,6 @@ module Coeus
       def value
         raise NotImplementedError
       end
-
-      private
-
-      attr_accessor :parent, :left, :right
 
       def leaf?
         raise NotImplementedError
@@ -29,8 +21,8 @@ module Coeus
     class LeafNode < Node
       attr_reader :formula
 
-      def initialize(formula, parent: nil)
-        super(parent: parent)
+      def initialize(formula)
+        super()
         @formula = formula
       end
 
@@ -43,8 +35,8 @@ module Coeus
     class UnaryNode < Node
       attr_reader :child
 
-      def initialize(child:, parent: nil)
-        super(parent: parent)
+      def initialize(child:)
+        super()
         @child = child
       end
 
@@ -57,8 +49,8 @@ module Coeus
     class BinaryNode < Node
       attr_reader :left, :right
 
-      def initialize(left:, right:, parent: nil)
-        super(parent: parent)
+      def initialize(left:, right:)
+        super()
         @left = left
         @right = right
       end
