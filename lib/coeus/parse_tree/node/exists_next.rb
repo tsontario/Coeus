@@ -11,7 +11,10 @@ module Coeus
         model = labelling.model
         model.states.select do |from_state|
           model.transitions_for(from_state).each do |to_state|
-            labelling.for(from_state.name).add_label(self) if labelling.for(to_state.name).has_label?(child)
+            if labelling.for(to_state.name).has_label?(child)
+              labelling.for(from_state.name).add_label(self) 
+              break
+            end
           end
         end
       end
