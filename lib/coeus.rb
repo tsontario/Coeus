@@ -8,4 +8,5 @@ require_relative 'coeus/parse_tree'
 
 # Entrypoint for library
 module Coeus
+  class Error < StandardError; end
 end

@@ -18,7 +18,7 @@ module TestHelper
   def self.transitions_from_yaml(yaml, states)
     Coeus::Transition.new(
       from: states.find { |s| s.name == yaml['from'] },
-      to: states.select { |s| s.name == yaml['to'] }
+      to: states.select { |s| yaml['to'].include?(s.name) }
     )
   end
 end

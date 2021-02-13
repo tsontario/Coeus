@@ -8,7 +8,8 @@ states:
       - b
 transitions:
   - from: s0
-    to: s1
+    to:
+      - s1
   - from: s1
     to:
       - s0

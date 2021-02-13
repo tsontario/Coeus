@@ -26,5 +26,10 @@ module Coeus
       @states = states
       @transitions = transitions
     end
+
+    def transitions_for(state)
+      result = transitions.detect { |transition_list| transition_list.from == state }
+      result || raise(Error, "no transitions found for state #{state.name}")
+    end
   end
 end

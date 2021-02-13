@@ -3,12 +3,13 @@
 module Coeus
   # Transition models the transition relation from a single state to another single state.
   class Transition
+    include Enumerable
     class << self
       # We must pass in states since we expect them to be defined prior to enumerating the transitions and want
       # to maintain an reference via this object
       def from_yaml(yaml, states)
         from = states.find { |s| s.name == yaml['from'] }
-        to = states.select { |s| s.name == yaml['to'] }
+        to = states.select { |s| yaml['to'].include?(s.name) }
         Transition.new(from: from, to: to)
       end
     end
@@ -26,6 +27,10 @@ module Coeus
     def ==(other)
       from == other.from &&
         to == other.to
+    end
+
+    def each(&block)
+      @to.map(&block)
     end
   end
 end

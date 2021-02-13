@@ -121,4 +121,22 @@ describe Coeus::Labelling do
       expect(s2_labelling.labels).to contain_exactly(a_node, b_node, and_node)
     end
   end
+
+  context 'when evaluating exists next expressions' do
+    it 'labels s0 and s1 with EX b' do
+      yaml = YAML.load_file("#{TestHelper.fixture_path}/for_exists_next_test.yaml")
+      model = Coeus::Model.from_yaml(yaml)
+      labelling = described_class.new(model)
+      b_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
+      exists_next_node = Coeus::ParseTree::ExistsNext.new(child: b_node)
+      parse_tree = Coeus::ParseTree.new(exists_next_node)
+      labelling.sat(parse_tree)
+      s0_labelling = labelling.for('s0')
+      s1_labelling = labelling.for('s1')
+      s2_labelling = labelling.for('s2')
+      expect(s0_labelling.labels).to contain_exactly(exists_next_node)
+      expect(s1_labelling.labels).to contain_exactly(b_node, exists_next_node)
+      expect(s2_labelling.labels).to contain_exactly(b_node)
+    end
+  end
 end

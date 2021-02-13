@@ -8,7 +8,6 @@ states:
       - b
   - name: s2
     atoms:
-      - a
       - b
 transitions:
   - from: s0
@@ -17,6 +16,7 @@ transitions:
   - from: s1
     to:
       - s0
-  - from: s1
-    to:
       - s2
+  - from: s2
+    to:
+      - s0

@@ -3,8 +3,10 @@
 module Coeus
   # A Labelling keeps track of the labels satisfied by a given formula for all states of a Model
   class Labelling
+    attr_reader :model
     attr_accessor :state_labellings
 
+    delegate :states, to: :model
     # StateLabels is a storage container for keeping track of satisfied formula(e) for the associated state
     class StateLabels
       attr_reader :state
