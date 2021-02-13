@@ -9,10 +9,9 @@ module Coeus
   # The Model class contains a collection of items which, taken together, define a transition system.
   # In particular, it contains a set of states, a set of transitions _between_ states, and a set of labels
   class Model
+    # Do not allow Model instances to be created directly
+    private_class_method :new
     class << self
-      # Do not allow Model instances to be created directly
-      private_class_method :new
-
       def from_yaml(yaml)
         # TODO: schema validate
         states = (yaml['states'] || []).map { |s| State.from_yaml(s) }
@@ -26,11 +25,6 @@ module Coeus
     def initialize(states:, transitions:)
       @states = states
       @transitions = transitions
-    end
-
-    # sat determines the set of states that satisfy formula
-    def sat(formula)
-      # TODO: implement CTL algorithm
     end
   end
 end

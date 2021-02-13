@@ -8,14 +8,14 @@ module Coeus
       # to maintain an reference via this object
       def from_yaml(yaml, states)
         from = states.find { |s| s.name == yaml['from'] }
-        to = states.find { |s| s.name == yaml['to'] }
+        to = states.select { |s| s.name == yaml['to'] }
         Transition.new(from: from, to: to)
       end
     end
     attr_reader :from, :to
 
     def initialize(from:, to:)
-      unless [from, to].all? { |arg| arg.is_a?(State) }
+      unless from.is_a?(State) && to.all? { |t| t.is_a?(State) }
         raise ArgumentError, "Transition constructor must be given State objects but got: #{from.class}, #{to.class}"
       end
 
