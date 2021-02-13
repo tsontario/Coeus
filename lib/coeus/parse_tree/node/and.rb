@@ -2,7 +2,7 @@
 
 module Coeus
   class ParseTree
-    # A ParseTree node representing a single predicate value. Atomics are always leaf nodes.
+    # A ParseTree node representing the AND operator
     class And < BinaryNode
       def sat(labelling)
         left.sat(labelling)
