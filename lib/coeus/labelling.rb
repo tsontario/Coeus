@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 module Coeus
-  # A Labelling keeps track of the labels satisfied by a given state
+  # A Labelling keeps track of the labels satisfied by a given formula for all states of a Model
   class Labelling
     attr_accessor :state_labellings
 
     # StateLabels is a storage container for keeping track of satisfied formula(e) for the associated state
     class StateLabels
       attr_reader :state
+
+      delegate :name, to: :state
 
       def initialize(state)
         @state = state
@@ -28,8 +30,14 @@ module Coeus
       @state_labellings = model.states.map { |state| StateLabels.new(state) }
     end
 
+    def for(state_name)
+      state_labellings.find { |state_labelling| state_labelling.name == state_name }
+    end
+
     # we expect a parse tree here... should validate
     def sat(formula)
+      # Always reset state_labellings so we can run different formulae on a given instance
+      @state_labellings = @model.states.map { |state| StateLabels.new(state) }
       # formula is a tree, can we simply delegate solutioning to the subclasses? Pass down self to access labelling
       formula.sat(self)
     end
