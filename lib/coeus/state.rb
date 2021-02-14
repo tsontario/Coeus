@@ -25,6 +25,10 @@ module Coeus
       @initial
     end
 
+    def bind_labelling(labelling)
+      @labelling = labelling
+    end
+
     def ==(other)
       name == other.name &&
         atoms.sort == other.atoms.sort &&

@@ -15,9 +15,10 @@ module Coeus
 
       def initialize(state)
         @state = state
+        state.bind_labelling(self)
       end
 
-      # Labels are nodes of the parse tree
+      # Labels are just nodes of the parse tree
       def add_label(node)
         labels << node
       end

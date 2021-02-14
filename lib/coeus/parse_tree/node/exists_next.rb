@@ -5,9 +5,8 @@ module Coeus
     # A ParseTree node representing an Exists Next State (EX) formula
     class ExistsNext < UnaryNode
       def sat(labelling)
-        child.sat(labelling)
+        child_sat = child.sat(labelling)
 
-        # Go through all states and label them with this node if any of their transitions are labeled with child
         model = labelling.model
         model.states.select do |from_state|
           model.transitions_for(from_state).each do |to_state|
