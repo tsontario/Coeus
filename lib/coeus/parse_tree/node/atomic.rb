@@ -5,9 +5,14 @@ module Coeus
     # A ParseTree node representing a single predicate value. Atomics are always leaf nodes.
     class Atomic < LeafNode
       def sat(labelling)
+        labelled = []
         labelling.state_labellings.each do |state_labelling|
-          state_labelling.add_label(self) if state_labelling.state.atoms.include?(value)
+          if state_labelling.state.atoms.include?(value)
+            state_labelling.add_label(self)
+            labelled << state_labelling
+          end
         end
+        labelled
       end
     end
   end

@@ -5,11 +5,16 @@ module Coeus
     # A ParseTree node representing the AND operator
     class And < BinaryNode
       def sat(labelling)
-        left.sat(labelling)
-        right.sat(labelling)
-        labelling.state_labellings.each do |state_labelling|
-          state_labelling.add_label(self) if state_labelling.has_label?(left) && state_labelling.has_label?(right)
+        left_sat = left.sat(labelling)
+        right_sat = right.sat(labelling)
+
+        labelled = []
+
+        (left_sat.intersection(right_sat)).each do |state_labelling|
+          state_labelling.add_label(self)
+          labelled << state_labelling
         end
+        labelled
       end
     end
   end

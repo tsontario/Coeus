@@ -7,21 +7,26 @@ module Coeus
     # E [ left_child U right_child ]
     class ExistsUntil < BinaryNode
       def sat(labelling)
-        left.sat(labelling)
-        right.sat(labelling)
+        left_sat = left.sat(labelling)
+        right_sat = right.sat(labelling)
 
-        # If the right child is already true, the expression is trivially true for that state
+        candidates = []
         labelling.state_labellings.each do |state_labelling|
           state_labelling.add_label(self) if state_labelling.has_label?(right)
         end
 
-        # Keep iterating by backfilling states that immediately satisfy the expression.
-        # Continue in this manner until no changes occur during an iteration.
+        backfill(labelling, left_sat)
+      end
+
+      private
+
+      # Consider states that satisfy :left
+      # Continue in this manner until no changes occur during an iteration.
+      def backfill(labelling, candidates)
         model = labelling.model
-        candidates = model.states.dup
         loop do
           changes_made = false
-          candidates.each do |from_state|
+          candidates.map(&:state).each do |from_state|
             from_state_labelling = labelling.for(from_state.name)
             if from_state_labelling.has_label?(self)
               candidates -= [from_state]

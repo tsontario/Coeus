@@ -5,10 +5,16 @@ module Coeus
     # A ParseTree node representing the NOT operator
     class Not < UnaryNode
       def sat(labelling)
-        child.sat(labelling)
+        child_sat = child.sat(labelling)
+
+        labelled = []
         labelling.state_labellings.each do |state_labelling|
-          state_labelling.add_label(self) unless state_labelling.has_label?(child)
+          unless state_labelling.has_label?(child)
+            state_labelling.add_label(self)
+            labelled << state_labelling
+          end
         end
+        labelled
       end
     end
   end
