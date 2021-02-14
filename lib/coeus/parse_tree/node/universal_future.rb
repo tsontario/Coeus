@@ -6,29 +6,24 @@ module Coeus
     class UniversalFuture < UnaryNode
       def sat(labelling)
         # TODO: needs tests
-        child.sat(labelling)
+        child_sat = child.sat(labelling)
 
-        labelling.state_labellings.each do |state_labelling|
-          state_labelling.add_label(self) if state_labelling.has_label?(child)
+        child_sat.each do |state_labelling|
+          state_labelling.add_label(self)
         end
 
-        model = labelling.model
-        candidates = model.states.dup
+        candidates = child_sat.dup
+
         loop do
           changes_made = false
+          next_candidates = []
           candidates.each do |from_state|
-            from_state_labelling = labelling.for(from_state.name)
-            if from_state_labelling.has_label?(self) # Otherwise we will keep labelling the same node(s) ad infinitum
-              candidates -= [from_state]
-              next
+            if from_state.transitions_to.all? { |to_state| to_state.has_label?(child) }
+              # Label the state with self, calculate all transitions_from that aren't already labelled with self and add to new_candidates
+              byebug
             end
-            next unless from_state_labelling.has_label?(child) && model.transitions_for(from_state).all? do |to_state|
-                          labelling.for(to_state.name).has_label?(self)
-                        end
-
-            from_state_labelling.add_label(self)
-            changes_made = true
           end
+          candidates = next_candidates
           break unless changes_made
         end
       end
