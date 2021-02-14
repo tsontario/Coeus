@@ -28,6 +28,7 @@ module Coeus
         model = labelling.model
         loop do
           changes_made = false
+          next_candidates = []
           candidates.map(&:state).each do |from_state|
             from_state_labelling = labelling.for(from_state.name)
             if from_state_labelling.has_label?(self)
@@ -40,10 +41,11 @@ module Coeus
 
             from_state_labelling.add_label(self)
             labelled << from_state_labelling
-            (candidates += from_state.transitions_from.map(&:labelling)).uniq
+            (next_candidates += from_state.transitions_from.map(&:labelling)).uniq
             changes_made = true
           end
           break unless changes_made
+          candidates = next_candidates
         end
         labelled
       end
