@@ -139,4 +139,49 @@ describe Coeus::Labelling do
       expect(s2_labelling.labels).to contain_exactly(b_node)
     end
   end
+
+  context 'when evaluating exists until expressions' do
+    it 'labels s0, s1 with E [a U b]' do
+      yaml = YAML.load_file("#{TestHelper.fixture_path}/simple.yaml")
+      model = Coeus::Model.from_yaml(yaml)
+      labelling = described_class.new(model)
+      a_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
+      b_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
+      exists_until_node = Coeus::ParseTree::ExistsUntil.new(left: a_node, right: b_node)
+      parse_tree = Coeus::ParseTree.new(exists_until_node)
+      labelling.sat(parse_tree)
+      s0_labelling = labelling.for('s0')
+      s1_labelling = labelling.for('s1')
+
+      expect(s0_labelling.labels).to contain_exactly(exists_until_node, a_node)
+      expect(s1_labelling.labels).to contain_exactly(exists_until_node, b_node)
+    end
+
+    it 'labels s0, s1, s2, s3, and s4 of the mutex example for E [!c2 U c1]' do
+      # Based on page 226 figure 3.27 "Logic in CS" Mutex example
+      yaml = YAML.load_file("#{TestHelper.fixture_path}/exists_until_test.yaml")
+      model = Coeus::Model.from_yaml(yaml)
+      labelling = described_class.new(model)
+      c1_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('c1'))
+      c2_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('c2'))
+      not_node = Coeus::ParseTree::Not.new(child: c2_node)
+      exists_until_node = Coeus::ParseTree::ExistsUntil.new(left: not_node, right: c1_node)
+      parse_tree = Coeus::ParseTree.new(exists_until_node)
+      labelling.sat(parse_tree)
+      expectations = {
+        's0' => [exists_until_node, not_node],
+        's1' => [exists_until_node, not_node],
+        's2' => [exists_until_node, c1_node, not_node],
+        's3' => [exists_until_node, not_node],
+        's4' => [exists_until_node, c1_node, not_node],
+        's5' => [not_node],
+        's6' => [c2_node],
+        's7' => [c2_node],
+        's8' => [not_node]
+      }
+      expectations.each do |state, nodes|
+        expect(labelling.for(state).labels).to contain_exactly(*nodes)
+      end
+    end
+  end
 end

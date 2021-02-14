@@ -1,0 +1,73 @@
+# Transition system modelling Mutex example (Logic in CS page 188)
+---
+states:
+  - name: s0
+    atoms:
+      - n1
+      - n2
+    initial: true
+  - name: s1
+    atoms:
+      - t1
+      - n2
+  - name: s2
+    atoms:
+      - c1
+      - n2
+  - name: s3
+    atoms:
+      - t1
+      - t2
+  - name: s4
+    atoms:
+      - c1
+      - t2
+  - name: s5
+    atoms:
+      - n1
+      - t2
+  - name: s6
+    atoms:
+      - n1
+      - c2
+  - name: s7
+    atoms:
+      - t1
+      - c2
+  - name: s8
+    atoms:
+      - t1
+      - t2
+transitions:
+  - from: s0
+    to:
+      - s1
+      - s5
+  - from: s1
+    to:
+      - s2
+      - s3
+  - from: s2
+    to:
+      - s0
+      - s4
+  - from: s3
+    to:
+      - s4
+  - from: s4
+    to:
+      - s5
+  - from: s5
+    to:
+      - s8
+      - s6
+  - from: s6
+    to:
+      - s0
+      - s7
+  - from: s7
+    to:
+      - s1
+  - from: s8
+    to:
+      - s7

@@ -19,11 +19,11 @@ module Coeus
 
     # A leaf node, e.g. one that has no children
     class LeafNode < Node
-      attr_reader :formula
+      attr_reader :value
 
-      def initialize(formula)
+      def initialize(value)
         super()
-        @formula = formula
+        @value = value
       end
 
       def leaf?

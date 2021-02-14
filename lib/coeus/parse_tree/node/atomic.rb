@@ -6,7 +6,7 @@ module Coeus
     class Atomic < LeafNode
       def sat(labelling)
         labelling.state_labellings.each do |state_labelling|
-          state_labelling.add_label(self) if state_labelling.state.atoms.include?(formula)
+          state_labelling.add_label(self) if state_labelling.state.atoms.include?(value)
         end
       end
     end

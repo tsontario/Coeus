@@ -29,6 +29,8 @@ module Coeus
       name == other.name &&
         atoms.sort == other.atoms.sort &&
         initial_state? == other.initial_state?
+      rescue ArgumentError => e
+        byebug
     end
   end
 end

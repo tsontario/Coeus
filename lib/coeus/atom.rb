@@ -3,6 +3,7 @@
 module Coeus
   # Atom represents a predicate value that is considered true when present in a State object
   class Atom
+    include Comparable
     attr_reader :value
 
     def initialize(value)
@@ -10,8 +11,8 @@ module Coeus
     end
 
     # TODO: test
-    def ==(other)
-      value == other.value
+    def <=>(other)
+      value <=> other.value
     end
   end
 end
