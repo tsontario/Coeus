@@ -10,11 +10,13 @@ module Coeus
         left_sat = left.sat(labelling)
         right_sat = right.sat(labelling)
 
+        labelled = []
         right_sat.each.each do |state_labelling|
           state_labelling.add_label(self)
+          labelled << state_labelling
         end
 
-        backfill(labelling, left_sat)
+        labelled + backfill(labelling, left_sat)
       end
 
       private
@@ -22,6 +24,7 @@ module Coeus
       # Consider states that satisfy :left
       # Continue in this manner until no changes occur during an iteration.
       def backfill(labelling, candidates)
+        labelled = []
         model = labelling.model
         loop do
           changes_made = false
@@ -36,11 +39,13 @@ module Coeus
                         end
 
             from_state_labelling.add_label(self)
+            labelled << from_state_labelling
             (candidates += from_state.transitions_from.map(&:labelling)).uniq
             changes_made = true
           end
           break unless changes_made
         end
+        labelled
       end
     end
   end

@@ -19,13 +19,6 @@ module Coeus
 
     # A leaf node, e.g. one that has no children
     class LeafNode < Node
-      attr_reader :value
-
-      def initialize(value)
-        super()
-        @value = value
-      end
-
       def leaf?
         true
       end

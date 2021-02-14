@@ -183,5 +183,33 @@ describe Coeus::Labelling do
         expect(labelling.for(state).labels).to contain_exactly(*nodes)
       end
     end
+
+    it 'labels the same with AND T E [!c2 U c1]' do
+      yaml = YAML.load_file("#{TestHelper.fixture_path}/exists_until_test.yaml")
+      model = Coeus::Model.from_yaml(yaml)
+      labelling = described_class.new(model)
+      c1_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('c1'))
+      c2_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('c2'))
+      not_node = Coeus::ParseTree::Not.new(child: c2_node)
+      exists_until_node = Coeus::ParseTree::ExistsUntil.new(left: not_node, right: c1_node)
+      true_node = Coeus::ParseTree::True.new
+      and_node = Coeus::ParseTree::And.new(left: true_node, right: exists_until_node)
+      parse_tree = Coeus::ParseTree.new(exists_until_node)
+      labelling.sat(parse_tree)
+      expectations = {
+        's0' => [exists_until_node, not_node],
+        's1' => [exists_until_node, not_node],
+        's2' => [exists_until_node, c1_node, not_node],
+        's3' => [exists_until_node, not_node],
+        's4' => [exists_until_node, c1_node, not_node],
+        's5' => [not_node],
+        's6' => [c2_node],
+        's7' => [c2_node],
+        's8' => [not_node]
+      }
+      expectations.each do |state, nodes|
+        expect(labelling.for(state).labels).to contain_exactly(*nodes)
+      end
+    end
   end
 end

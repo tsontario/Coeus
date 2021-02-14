@@ -4,6 +4,11 @@ module Coeus
   class ParseTree
     # A ParseTree node representing a single predicate value. Atomics are always leaf nodes.
     class Atomic < LeafNode
+      attr_reader :value
+      def initialize(value)
+        @value = value
+      end
+
       def sat(labelling)
         labelled = []
         labelling.state_labellings.each do |state_labelling|
