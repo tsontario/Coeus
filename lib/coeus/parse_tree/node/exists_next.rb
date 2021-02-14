@@ -7,14 +7,8 @@ module Coeus
       def sat(labelling)
         child_sat = child.sat(labelling)
 
-        model = labelling.model
-        model.states.select do |from_state|
-          model.transitions_for(from_state).each do |to_state|
-            if labelling.for(to_state.name).has_label?(child)
-              labelling.for(from_state.name).add_label(self)
-              break
-            end
-          end
+        child_sat.map(&:transitions_from).flatten.map(&:labelling).each do |from_state|
+          labelling.for(from_state.name).add_label(self)
         end
       end
     end

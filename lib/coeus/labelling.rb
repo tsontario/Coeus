@@ -11,7 +11,7 @@ module Coeus
     class StateLabels
       attr_reader :state
 
-      delegate :name, to: :state
+      delegate :name, :transitions_from, :transitions_to, to: :state
 
       def initialize(state)
         @state = state
