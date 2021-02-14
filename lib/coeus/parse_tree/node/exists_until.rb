@@ -10,7 +10,6 @@ module Coeus
         left_sat = left.sat(labelling)
         right_sat = right.sat(labelling)
 
-        candidates = []
         right_sat.each.each do |state_labelling|
           state_labelling.add_label(self)
         end
@@ -37,6 +36,7 @@ module Coeus
                         end
 
             from_state_labelling.add_label(self)
+            (candidates += from_state.transitions_from.map(&:labelling)).uniq
             changes_made = true
           end
           break unless changes_made
