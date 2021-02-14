@@ -16,7 +16,14 @@ module Coeus
         # TODO: schema validate
         states = (yaml['states'] || []).map { |s| State.from_yaml(s) }
         transitions = (yaml['transitions'] || []).map { |t| Transition.from_yaml(t, states) }
-        new(states: states, transitions: transitions)
+        model = new(states: states, transitions: transitions)
+        model.states.each do |state|
+          state.transitions_to = model.transitions_for(state)
+          state.transitions_from = transitions.select do |transition|
+            transition.to.include?(state)
+          end.map(&:from)
+        end
+        model
       end
     end
 
@@ -28,8 +35,7 @@ module Coeus
     end
 
     def transitions_for(state)
-      result = transitions.detect { |transition_list| transition_list.from == state }
-      result || raise(Error, "no transitions found for state #{state.name}")
+      transitions.detect { |transition_list| transition_list.from == state }
     end
   end
 end

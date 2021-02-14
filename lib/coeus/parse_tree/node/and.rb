@@ -10,7 +10,7 @@ module Coeus
 
         labelled = []
 
-        (left_sat.intersection(right_sat)).each do |state_labelling|
+        left_sat.intersection(right_sat).each do |state_labelling|
           state_labelling.add_label(self)
           labelled << state_labelling
         end

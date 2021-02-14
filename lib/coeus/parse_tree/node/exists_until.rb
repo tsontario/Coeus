@@ -11,8 +11,8 @@ module Coeus
         right_sat = right.sat(labelling)
 
         candidates = []
-        labelling.state_labellings.each do |state_labelling|
-          state_labelling.add_label(self) if state_labelling.has_label?(right)
+        right_sat.each.each do |state_labelling|
+          state_labelling.add_label(self)
         end
 
         backfill(labelling, left_sat)
@@ -32,12 +32,12 @@ module Coeus
               candidates -= [from_state]
               next
             end
-            if from_state_labelling.has_label?(left)
-              if model.transitions_for(from_state).any? { |to_state| labelling.for(to_state.name).has_label?(self) }
-                from_state_labelling.add_label(self)
-                changes_made = true
-              end
-            end
+            next unless from_state_labelling.has_label?(left) && model.transitions_for(from_state).any? do |to_state|
+                          labelling.for(to_state.name).has_label?(self)
+                        end
+
+            from_state_labelling.add_label(self)
+            changes_made = true
           end
           break unless changes_made
         end

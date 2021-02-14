@@ -12,6 +12,7 @@ module Coeus
         )
       end
     end
+    attr_accessor :transitions_to, :transitions_from
     attr_reader :name, :atoms
 
     def initialize(name:, atoms:, initial: false)

@@ -5,7 +5,7 @@ module Coeus
     # A ParseTree node representing a Universal Future (AF) formula
     class UniversalFuture < UnaryNode
       def sat(labelling)
-        # TODO needs tests
+        # TODO: needs tests
         child.sat(labelling)
 
         labelling.state_labellings.each do |state_labelling|
@@ -22,12 +22,12 @@ module Coeus
               candidates -= [from_state]
               next
             end
-            if from_state_labelling.has_label?(child)
-              if model.transitions_for(from_state).all? { |to_state| labelling.for(to_state.name).has_label?(self) }
-                from_state_labelling.add_label(self)
-                changes_made = true
-              end
-            end
+            next unless from_state_labelling.has_label?(child) && model.transitions_for(from_state).all? do |to_state|
+                          labelling.for(to_state.name).has_label?(self)
+                        end
+
+            from_state_labelling.add_label(self)
+            changes_made = true
           end
           break unless changes_made
         end
