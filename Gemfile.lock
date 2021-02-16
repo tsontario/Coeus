@@ -17,6 +17,7 @@ GEM
     parallel (1.20.1)
     parser (3.0.0.0)
       ast (~> 2.4.1)
+    racc (1.5.2)
     rainbow (3.0.0)
     regexp_parser (2.0.3)
     rexml (3.2.4)
@@ -59,6 +60,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport (~> 6.1)
   byebug (~> 11.1)
+  racc (~> 1.5, >= 1.5.2)
   rspec (~> 3.10)
   rubocop (~> 1.9)
   rubocop-rspec (~> 2.0)
