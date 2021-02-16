@@ -5,7 +5,7 @@ module Coeus
     # A ParseTree node representing the NOT operator
     class Not < UnaryNode
       def sat(labelling)
-        child_sat = child.sat(labelling)
+        child.sat(labelling)
 
         labelled = []
         labelling.state_labellings.each do |state_labelling|

@@ -21,8 +21,6 @@ module Coeus
 
       private
 
-      # Consider states that satisfy :left
-      # Continue in this manner until no changes occur during an iteration.
       def backfill(labelling, candidates)
         labelled = []
         model = labelling.model
@@ -35,6 +33,7 @@ module Coeus
               candidates -= [from_state]
               next
             end
+
             next unless from_state_labelling.has_label?(left) && model.transitions_for(from_state).any? do |to_state|
                           labelling.for(to_state.name).has_label?(self)
                         end
@@ -45,6 +44,7 @@ module Coeus
             changes_made = true
           end
           break unless changes_made
+
           candidates = next_candidates
         end
         labelled

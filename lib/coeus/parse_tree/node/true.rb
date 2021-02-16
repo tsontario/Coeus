@@ -6,9 +6,7 @@ module Coeus
     class True < LeafNode
       def sat(labelling)
         labelling.state_labellings.each do |state_labelling|
-          unless state_labelling.has_label?(child)
-            state_labelling.add_label(self)
-          end
+          state_labelling.add_label(self) unless state_labelling.has_label?(child)
         end
         state_labellings
       end

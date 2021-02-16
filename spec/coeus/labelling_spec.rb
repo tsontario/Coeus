@@ -184,7 +184,7 @@ describe Coeus::Labelling do
       end
     end
 
-    it 'labels the same with AND T E [!c2 U c1]' do
+    it 'labels the same as other test with AND T E [!c2 U c1]' do
       yaml = YAML.load_file("#{TestHelper.fixture_path}/exists_until_test.yaml")
       model = Coeus::Model.from_yaml(yaml)
       labelling = described_class.new(model)
@@ -194,7 +194,7 @@ describe Coeus::Labelling do
       exists_until_node = Coeus::ParseTree::ExistsUntil.new(left: not_node, right: c1_node)
       true_node = Coeus::ParseTree::True.new
       and_node = Coeus::ParseTree::And.new(left: true_node, right: exists_until_node)
-      parse_tree = Coeus::ParseTree.new(exists_until_node)
+      parse_tree = Coeus::ParseTree.new(and_node)
       labelling.sat(parse_tree)
       expectations = {
         's0' => [exists_until_node, not_node],
@@ -206,6 +206,31 @@ describe Coeus::Labelling do
         's6' => [c2_node],
         's7' => [c2_node],
         's8' => [not_node]
+      }
+      expectations.each do |state, nodes|
+        expect(labelling.for(state).labels).to contain_exactly(*nodes)
+      end
+    end
+  end
+
+  context 'when evaluating universal future expressions' do
+    it 'behaves as expected across a tree of state nodes' do
+      yaml = YAML.load_file("#{TestHelper.fixture_path}/universal_future_test.yaml")
+      model = Coeus::Model.from_yaml(yaml)
+      labelling = described_class.new(model)
+      c1_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
+      universal_future_node = Coeus::ParseTree::UniversalFuture.new(child: c1_node)
+      parse_tree = Coeus::ParseTree.new(universal_future_node)
+      labelling.sat(parse_tree)
+      expectations = {
+        's0' => [],
+        's1' => [universal_future_node],
+        's2' => [universal_future_node, c1_node],
+        's3' => [universal_future_node, c1_node],
+        's4' => [],
+        's5' => [],
+        's6' => [],
+        's7' => []
       }
       expectations.each do |state, nodes|
         expect(labelling.for(state).labels).to contain_exactly(*nodes)

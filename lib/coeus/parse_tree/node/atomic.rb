@@ -5,7 +5,9 @@ module Coeus
     # A ParseTree node representing a single predicate value. Atomics are always leaf nodes.
     class Atomic < LeafNode
       attr_reader :value
+
       def initialize(value)
+        super()
         @value = value
       end
 

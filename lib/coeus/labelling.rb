@@ -37,6 +37,8 @@ module Coeus
       @state_labellings = model.states.map { |state| StateLabels.new(state) }
     end
 
+    # TODO: store as hash for fast lookup
+    # e.g. { state_name: state_object }
     def for(state_name)
       state_labellings.find { |state_labelling| state_labelling.name == state_name }
     end
