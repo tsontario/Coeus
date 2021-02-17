@@ -2,7 +2,7 @@
 
 module Coeus
   class ParseTree
-    # A ParseTree node representing the NOT operator
+    # A ParseTree node representing a TRUE expression
     class True < LeafNode
       def sat(labelling)
         labelling.state_labellings.each do |state_labelling|

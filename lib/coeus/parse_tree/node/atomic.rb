@@ -2,7 +2,7 @@
 
 module Coeus
   class ParseTree
-    # A ParseTree node representing a single predicate value. Atomics are always leaf nodes.
+    # A ParseTree node representing a single predicate value
     class Atomic < LeafNode
       attr_reader :value
 
