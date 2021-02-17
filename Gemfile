@@ -14,3 +14,5 @@ gem 'rubocop', '~> 1.9'
 gem 'byebug', '~> 11.1'
 
 gem 'rubocop-rspec', '~> 2.0', require: false
+
+gem "rexical", "~> 1.0"
