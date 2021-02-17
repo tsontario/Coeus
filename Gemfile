@@ -14,4 +14,4 @@ gem 'byebug', '~> 11.1'
 
 gem 'rubocop-rspec', '~> 2.0', require: false
 
-gem "rly", "~> 0.2.3"
+gem 'rly', '~> 0.2.3'

@@ -10,6 +10,4 @@ require_relative 'coeus/language'
 # Entrypoint for library
 module Coeus
   class Error < StandardError; end
-
-  
 end

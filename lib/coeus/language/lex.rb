@@ -16,20 +16,20 @@ module Coeus
       token :IMPLIES, /->/
 
       # Path descriptors
-      token :AF , /AF/
+      token :AF, /AF/
       token :EF, /EF/
       token :AG, /AG/
       token :EG, /EG/
       token :AX, /AX/
       token :EX, /EX/
-      
+
       token :UNIVERSAL, /A/
       token :EXISTENTIAL, /E/
       token :UNTIL, /U/
 
       token :LEFT_BRACKET, /\[/
       token :RIGHT_BRACKET, /\]/
-      
+
       # Boolean literals
       token :TRUE, /TRUE/
       token :FALSE, /FALSE/

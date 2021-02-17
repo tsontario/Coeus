@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require 'byebug'
 module Coeus
   module Language
+    # CTLParse provides the parsing logic to translate CTL expressions into a Coeus::ParseTree
     class CTLParse < Rly::Yacc
       # Statement evaluates to a Coeus::ParseTree representing the input expression
       rule 'statement: expression' do |st, e|
@@ -13,15 +16,15 @@ module Coeus
                        | expression IMPLIES expression
             ' do |ex, left, op, right|
         ex.value = case op.value
-        when "AND"
-          ParseTree::And.new(left: left.value, right: right.value)
-        when "OR"
-          translate_or(left, right)
-        when "->"
-          translate_implies(left, right)
-        else
-          raise NotImplementedError
-        end
+                   when 'AND'
+                     ParseTree::And.new(left: left.value, right: right.value)
+                   when 'OR'
+                     translate_or(left, right)
+                   when '->'
+                     translate_implies(left, right)
+                   else
+                     raise NotImplementedError
+                   end
       end
 
       # Unary operators
@@ -33,32 +36,32 @@ module Coeus
                        | AX expression
                        | EX expression
       ' do |ex, operator, operand|
-        byebug
         ex.value = case operator.value
-        when "NOT"
-          ParseTree::Not.new(child: operand.value)
-        when "AF"
-          ParseTree::UniversalFuture(child: operand.value)
-        when "EF"
-          # TODO
-        when "AG"
-          translate_universal_global(operand)
-        when "EG"
-          # TODO
-        when "AX"
-          translate_universal_next(operand)
-        when "EX"
-          ParseTree::ExistsUntil(child: operand.value)
-        else
-          raise NotImplementedError.new("#{operand.value} not translated to adequate set yet")
-        end
-      end 
+                   when 'NOT'
+                     ParseTree::Not.new(child: operand.value)
+                   when 'AF'
+                     ParseTree::UniversalFuture(child: operand.value)
+                   when 'EF'
+                   # TODO
+                   when 'AG'
+                     # STILL TODO
+                     translate_universal_global(operand)
+                   when 'EG'
+                     translate_exists_global(operand)
+                   when 'AX'
+                     translate_universal_next(operand)
+                   when 'EX'
+                     ParseTree::ExistsUntil(child: operand.value)
+                   else
+                     raise NotImplementedError, "#{operand.value} not translated to adequate set yet"
+                   end
+      end
 
       # Until expressions
       rule 'expression : UNIVERSAL LEFT_BRACKET expression UNTIL expression RIGHT_BRACKET
                        | EXISTENTIAL LEFT_BRACKET expression UNTIL expression RIGHT_BRACKET
-      ' do | ex, qualifier, _, left, _, right|
-
+      ' do |ex, qualifier, _, left, _, right|
+        # TODO
       end
 
       # Atomic values
@@ -68,11 +71,11 @@ module Coeus
 
       # Boolean literals
       rule 'expression : TRUE | FALSE' do |ex, n|
-        if n.value == "False"
-          ex.value = ParseTree::False.new
-        else
-          ex.value = ParseTree::Not.new(child: ParseTree::False.new)
-        end
+        ex.value = if n.value == 'False'
+                     ParseTree::False.new
+                   else
+                     ParseTree::Not.new(child: ParseTree::False.new)
+                   end
       end
 
       private
@@ -89,12 +92,18 @@ module Coeus
       def translate_implies(left, right)
         right_node = ParseTree::Not.new(child: right.value)
         and_node = ParseTree::And.new(left: left.value, right: right_node)
+        ParseTree::Not.new(child: and_node)
+      end
 
-        outer_not = ParseTree::Not.new(child: and_node)
+      # EG(~P) == ~AF(P)
+      def translate_exists_global(child)
+        inner_not_node = ParseTree::Not.new(child: child)
+        af_node = ParseTree::UniversalFuture.new(child: inner_not_node)
+        ParseTree::Not.new(child: af_node)
       end
 
       def translate_universal_global(child)
-        
+        # TODO
       end
 
       def translate_universal_next(child)

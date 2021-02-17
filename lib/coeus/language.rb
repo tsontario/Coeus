@@ -13,9 +13,7 @@ module Coeus
       # a ParseTree instance representing it. The expression is represented using
       # an adequate set, so internal representation may differ from the exact input
       def from_expression(expression)
-        parser = Language.ctl_parser.parse(expression)
-        
-
+        Language.ctl_parser.parse(expression)
       end
 
       def ctl_parser
