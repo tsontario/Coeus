@@ -197,15 +197,15 @@ describe Coeus::Labelling do
       parse_tree = Coeus::ParseTree.new(and_node)
       labelling.sat(parse_tree)
       expectations = {
-        's0' => [exists_until_node, not_node, and_node],
-        's1' => [exists_until_node, not_node, and_node],
-        's2' => [exists_until_node, c1_node, not_node, and_node],
-        's3' => [exists_until_node, not_node, and_node],
-        's4' => [exists_until_node, c1_node, not_node, and_node],
-        's5' => [not_node],
-        's6' => [c2_node],
-        's7' => [c2_node],
-        's8' => [not_node]
+        's0' => [exists_until_node, not_node, and_node, true_node],
+        's1' => [exists_until_node, not_node, and_node, true_node],
+        's2' => [exists_until_node, c1_node, not_node, and_node,true_node],
+        's3' => [exists_until_node, not_node, and_node, true_node],
+        's4' => [exists_until_node, c1_node, not_node, and_node, true_node],
+        's5' => [not_node, true_node],
+        's6' => [c2_node, true_node],
+        's7' => [c2_node, true_node],
+        's8' => [not_node, true_node]
       }
       expectations.each do |state, nodes|
         expect(labelling.for(state).labels).to contain_exactly(*nodes)

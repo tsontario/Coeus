@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require 'byebug'
 module Coeus
   module Language
     # CTLParse provides the parsing logic to translate CTL expressions into a Coeus::ParseTree
     class CTLParse < Rly::Yacc
-      # Statement evaluates to a Coeus::ParseTree representing the input expression
       rule 'statement: expression' do |st, e|
         st.value = e.value
       end
