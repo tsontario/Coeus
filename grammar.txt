@@ -1,0 +1,509 @@
+Created by rly version 0.2.3
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> expression
+Rule 2     expression -> expression AND expression
+Rule 3     expression -> expression OR expression
+Rule 4     expression -> NOT expression
+Rule 5     expression -> AF expression
+Rule 6     expression -> EF expression
+Rule 7     expression -> AG expression
+Rule 8     expression -> EG expression
+Rule 9     expression -> AX expression
+Rule 10    expression -> EX expression
+Rule 11    expression -> ATOM
+Rule 12    expression -> TRUE
+Rule 13    expression -> FALSE
+
+Terminals, with rules where they appear
+
+AF                   : 5
+AG                   : 7
+AND                  : 2
+ATOM                 : 11
+AX                   : 9
+EF                   : 6
+EG                   : 8
+EX                   : 10
+EXISTENTIAL          : 
+FALSE                : 13
+LEFT_BRACKET         : 
+NOT                  : 4
+OR                   : 3
+RIGHT_BRACKET        : 
+TRUE                 : 12
+UNIVERSAL            : 
+UNTIL                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 1 2 2 3 3 4 5 6 7 8 9 10
+statement            : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    statement                      shift and go to state 1
+    expression                     shift and go to state 2
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 1 (statement -> expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+
+state 3
+
+    (4) expression -> NOT . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    expression                     shift and go to state 15
+
+state 4
+
+    (5) expression -> AF . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    expression                     shift and go to state 16
+
+state 5
+
+    (6) expression -> EF . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    expression                     shift and go to state 17
+
+state 6
+
+    (7) expression -> AG . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    expression                     shift and go to state 18
+
+state 7
+
+    (8) expression -> EG . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    expression                     shift and go to state 19
+
+state 8
+
+    (9) expression -> AX . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    expression                     shift and go to state 20
+
+state 9
+
+    (10) expression -> EX . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    expression                     shift and go to state 21
+
+state 10
+
+    (11) expression -> ATOM .
+
+    AND             reduce using rule 11 (expression -> ATOM .)
+    OR              reduce using rule 11 (expression -> ATOM .)
+    $end            reduce using rule 11 (expression -> ATOM .)
+
+
+state 11
+
+    (12) expression -> TRUE .
+
+    AND             reduce using rule 12 (expression -> TRUE .)
+    OR              reduce using rule 12 (expression -> TRUE .)
+    $end            reduce using rule 12 (expression -> TRUE .)
+
+
+state 12
+
+    (13) expression -> FALSE .
+
+    AND             reduce using rule 13 (expression -> FALSE .)
+    OR              reduce using rule 13 (expression -> FALSE .)
+    $end            reduce using rule 13 (expression -> FALSE .)
+
+
+state 13
+
+    (2) expression -> expression AND . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    expression                     shift and go to state 22
+
+state 14
+
+    (3) expression -> expression OR . expression
+    (2) expression -> . expression AND expression
+    (3) expression -> . expression OR expression
+    (4) expression -> . NOT expression
+    (5) expression -> . AF expression
+    (6) expression -> . EF expression
+    (7) expression -> . AG expression
+    (8) expression -> . EG expression
+    (9) expression -> . AX expression
+    (10) expression -> . EX expression
+    (11) expression -> . ATOM
+    (12) expression -> . TRUE
+    (13) expression -> . FALSE
+
+    NOT             shift and go to state 3
+    AF              shift and go to state 4
+    EF              shift and go to state 5
+    AG              shift and go to state 6
+    EG              shift and go to state 7
+    AX              shift and go to state 8
+    EX              shift and go to state 9
+    ATOM            shift and go to state 10
+    TRUE            shift and go to state 11
+    FALSE           shift and go to state 12
+
+    expression                     shift and go to state 23
+
+state 15
+
+    (4) expression -> NOT expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 4 (expression -> NOT expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+  ! AND             [ reduce using rule 4 (expression -> NOT expression .) ]
+  ! OR              [ reduce using rule 4 (expression -> NOT expression .) ]
+
+
+state 16
+
+    (5) expression -> AF expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 5 (expression -> AF expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+  ! AND             [ reduce using rule 5 (expression -> AF expression .) ]
+  ! OR              [ reduce using rule 5 (expression -> AF expression .) ]
+
+
+state 17
+
+    (6) expression -> EF expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 6 (expression -> EF expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+  ! AND             [ reduce using rule 6 (expression -> EF expression .) ]
+  ! OR              [ reduce using rule 6 (expression -> EF expression .) ]
+
+
+state 18
+
+    (7) expression -> AG expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 7 (expression -> AG expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+  ! AND             [ reduce using rule 7 (expression -> AG expression .) ]
+  ! OR              [ reduce using rule 7 (expression -> AG expression .) ]
+
+
+state 19
+
+    (8) expression -> EG expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 8 (expression -> EG expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+  ! AND             [ reduce using rule 8 (expression -> EG expression .) ]
+  ! OR              [ reduce using rule 8 (expression -> EG expression .) ]
+
+
+state 20
+
+    (9) expression -> AX expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 9 (expression -> AX expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+  ! AND             [ reduce using rule 9 (expression -> AX expression .) ]
+  ! OR              [ reduce using rule 9 (expression -> AX expression .) ]
+
+
+state 21
+
+    (10) expression -> EX expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 10 (expression -> EX expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+  ! AND             [ reduce using rule 10 (expression -> EX expression .) ]
+  ! OR              [ reduce using rule 10 (expression -> EX expression .) ]
+
+
+state 22
+
+    (2) expression -> expression AND expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 2 (expression -> expression AND expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+  ! AND             [ reduce using rule 2 (expression -> expression AND expression .) ]
+  ! OR              [ reduce using rule 2 (expression -> expression AND expression .) ]
+
+
+state 23
+
+    (3) expression -> expression OR expression .
+    (2) expression -> expression . AND expression
+    (3) expression -> expression . OR expression
+
+    $end            reduce using rule 3 (expression -> expression OR expression .)
+    AND             shift and go to state 13
+    OR              shift and go to state 14
+
+  ! AND             [ reduce using rule 3 (expression -> expression OR expression .) ]
+  ! OR              [ reduce using rule 3 (expression -> expression OR expression .) ]
+
+
