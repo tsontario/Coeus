@@ -1,3 +1,5 @@
+![Build](https://github.com/tsontario/coeus/workflows/Ruby/badge.svg)
+
 # Coeus
 
 Coeus is a Computation Tree Logic (CTL) model checker. In particular, it supports workflows to:
