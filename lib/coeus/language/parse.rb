@@ -8,8 +8,7 @@ module Coeus
       # Precedence statements (lower in the list == higher precedence)
       precedence :left, :IMPLIES, :AU, :EU
       precedence :left, :AND, :OR
-      # TODO Should these be right associative???
-      precedence :left, :NOT, :AG, :EG, :AF, :EF, :AX, :EX
+      precedence :right, :NOT, :AG, :EG, :AF, :EF, :AX, :EX
 
       rule 'statement: expression' do |st, e|
         st.value = e.value
