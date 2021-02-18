@@ -1,17 +1,24 @@
 # frozen_string_literal: true
 
+require 'rly'
+
 module Coeus
   module Language
     # CTLParse provides the parsing logic to translate CTL expressions into a Coeus::ParseTree
     class CTLParse < Rly::Yacc
-
       # Precedence statements (lower in the list == higher precedence)
       precedence :left, :IMPLIES, :AU, :EU
       precedence :left, :AND, :OR
       precedence :right, :NOT, :AG, :EG, :AF, :EF, :AX, :EX
 
+      # Results are wrapped in a ParseTree object
       rule 'statement: expression' do |st, e|
-        st.value = e.value
+        st.value = ParseTree.new(e.value)
+      end
+
+      # Parentheses
+      rule 'expression : LEFT_PAREN expression RIGHT_PAREN' do |ex, _, expression, _|
+        ex.value = expression.value
       end
 
       # Binary operators

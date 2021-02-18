@@ -21,6 +21,10 @@ module Coeus
         end
         labelled
       end
+
+      def ==(other)
+        self.class == other.class && value == other.value
+      end
     end
   end
 end

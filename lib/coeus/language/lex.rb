@@ -30,6 +30,9 @@ module Coeus
       token :LEFT_BRACKET, /\[/
       token :RIGHT_BRACKET, /\]/
 
+      token :LEFT_PAREN, /\(/
+      token :RIGHT_PAREN, /\)/
+
       # Boolean literals
       token :TRUE, /TRUE/
       token :FALSE, /FALSE/

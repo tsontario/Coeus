@@ -199,7 +199,7 @@ describe Coeus::Labelling do
       expectations = {
         's0' => [exists_until_node, not_node, and_node, true_node],
         's1' => [exists_until_node, not_node, and_node, true_node],
-        's2' => [exists_until_node, c1_node, not_node, and_node,true_node],
+        's2' => [exists_until_node, c1_node, not_node, and_node, true_node],
         's3' => [exists_until_node, not_node, and_node, true_node],
         's4' => [exists_until_node, c1_node, not_node, and_node, true_node],
         's5' => [not_node, true_node],

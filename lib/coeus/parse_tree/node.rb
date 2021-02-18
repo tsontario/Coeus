@@ -15,6 +15,10 @@ module Coeus
       def leaf?
         raise NotImplementedError
       end
+
+      def ==(other)
+        self.class == other.class
+      end
     end
 
     # A leaf node, e.g. one that has no children

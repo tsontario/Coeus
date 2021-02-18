@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby ">= 2.7.0"
+ruby '>= 2.7.0'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
@@ -18,4 +18,4 @@ gem 'rubocop-rspec', '~> 2.0', require: false
 
 gem 'rly', '~> 0.2.3'
 
-gem "rake", "~> 13.0"
+gem 'rake', '~> 13.0'
