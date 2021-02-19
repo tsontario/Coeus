@@ -4,11 +4,14 @@ require 'rly'
 
 module Coeus
   module Language
-    # CTLParse provides the parsing logic to translate CTL expressions into a Coeus::ParseTree
+    # ParserBase declares the parsing rules for evalutating CTL expressions.
+    # However, ParserBase is abstract and subclasses must implement
+    # parse_binary, parse_unary, parse_until, parse_boolean, and parse_atomic
     class ParserBase < Rly::Yacc
       # Precedence statements (lower in the list == higher precedence)
+      precedence :left, :AND
+      precedence :left, :OR
       precedence :left, :IMPLIES, :AU, :EU
-      precedence :left, :AND, :OR
       precedence :right, :NOT, :AG, :EG, :AF, :EF, :AX, :EX
 
       # Results are wrapped in a ParseTree object

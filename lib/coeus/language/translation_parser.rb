@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'rly'
 require_relative './parser_base'
 
 module Coeus
@@ -8,7 +7,7 @@ module Coeus
     # TranslationParser provides the parsing logic to translate CTL expressions into a Coeus::ParseTree
     # with the additional behaviour of converting expressions into equivalent forms that use an adequate set
     class TranslationParser < ParserBase
-      # We need to explicitly declare the rules in this class, Ruby won't look up the ancestor chain, here
+      # We need to explicitly assign the rules to this class, Rly won't look up the ancestor chain, unfortunately
       self.rules = ParserBase.rules
 
       private
@@ -20,7 +19,7 @@ module Coeus
         when 'AF'
           ParseTree::UniversalFuture(child: operand.value)
         when 'EF'
-        # TODO
+          # TODO
         when 'AG'
           # STILL TODO
           translate_universal_global(operand)
@@ -35,8 +34,8 @@ module Coeus
         end
       end
 
-      def parse_binary(left, _operator, right)
-        case op.value
+      def parse_binary(left, operator, right)
+        case operator.value
         when 'AND'
           ParseTree::And.new(left: left.value, right: right.value)
         when 'OR'
