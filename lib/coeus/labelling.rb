@@ -36,11 +36,11 @@ module Coeus
     end
 
     def state_labellings
-      state_labellings.values
+      @state_labellings.values || []
     end
 
     def for(state_name)
-      state_labellings[state_name]
+      @state_labellings[state_name]
     end
 
     def sat(tree)

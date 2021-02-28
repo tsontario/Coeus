@@ -18,7 +18,6 @@ module Coeus
 
     def sat(labelling)
       node.sat(labelling)
-      require 'byebug'; byebug
     end
 
     def ==(other)
