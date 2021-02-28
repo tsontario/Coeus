@@ -30,7 +30,7 @@ module Coeus
     end
 
     def each(&block)
-      @to.map(&block)
+      @to.each(&block)
     end
   end
 end

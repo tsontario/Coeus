@@ -18,7 +18,7 @@ module Coeus
         state.bind_labelling(self)
       end
 
-      # Labels are just nodes of the parse tree
+      # Labels are just node references to the parse tree
       def add_label(node)
         labels << node
       end
@@ -34,21 +34,20 @@ module Coeus
 
     def initialize(model)
       @model = model
-      @state_labellings = model.states.map { |state| StateLabels.new(state) }
+      # require 'byebug'; byebug
+      @state_labellings = model.states.each_with_object({}) { |state, acc| acc[state.name] = StateLabels.new(state) }
     end
 
     # TODO: store as hash for fast lookup
     # e.g. { state_name: state_object }
     def for(state_name)
-      state_labellings.find { |state_labelling| state_labelling.name == state_name }
+      state_labellings[state_name]
     end
 
-    # we expect a parse tree here... should validate
-    def sat(formula)
+    def sat(tree)
       # Always reset state_labellings so we can run different formulae on a given instance
-      @state_labellings = @model.states.map { |state| StateLabels.new(state) }
-      # formula is a tree, can we simply delegate solutioning to the subclasses? Pass down self to access labelling
-      formula.sat(self)
+      @state_labellings = model.states.each_with_object({}) { |state, acc| acc[state.name] = StateLabels.new(state) }
+      tree.sat(self)
     end
   end
 end
