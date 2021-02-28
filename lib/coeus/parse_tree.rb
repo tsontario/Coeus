@@ -18,8 +18,7 @@ module Coeus
 
     def sat(labelling)
       node.sat(labelling)
-      # TODO: if node is labelled in all states, then the CTL formula is satisfied. Otherwise,
-      # we will see the states in which it is _not_ satisfied
+      require 'byebug'; byebug
     end
 
     def ==(other)

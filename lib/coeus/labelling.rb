@@ -4,7 +4,6 @@ module Coeus
   # A Labelling keeps track of the labels satisfied by a given formula for all states of a Model
   class Labelling
     attr_reader :model
-    attr_accessor :state_labellings
 
     delegate :states, to: :model
     # StateLabels is a storage container for keeping track of satisfied formula(e) for the associated state
@@ -34,12 +33,12 @@ module Coeus
 
     def initialize(model)
       @model = model
-      # require 'byebug'; byebug
-      @state_labellings = model.states.each_with_object({}) { |state, acc| acc[state.name] = StateLabels.new(state) }
     end
 
-    # TODO: store as hash for fast lookup
-    # e.g. { state_name: state_object }
+    def state_labellings
+      state_labellings.values
+    end
+
     def for(state_name)
       state_labellings[state_name]
     end
