@@ -10,7 +10,7 @@ module Coeus
   class ParseTree
     attr_reader :node
 
-    Error = Class.new(StandardError)
+    Error = Class.new(Coeus::Error)
 
     def initialize(node)
       @node = node
@@ -18,6 +18,7 @@ module Coeus
 
     def sat(labelling)
       node.sat(labelling)
+      # Now we need to check if all states actually are labelled with @node (the head of this parse tree)
     end
 
     def ==(other)
@@ -42,7 +43,7 @@ module Coeus
         ParseTree.new(node.left) == new(other.node.left) &&
           ParseTree.new(node.right) == ParseTree.new(other.node.right)
       else
-        raise Error, "Unknown node class #{node&.class}"
+        raise Error, "Unknown node class #{node.class}"
       end
     end
   end
