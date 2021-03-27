@@ -19,12 +19,28 @@ module Coeus
       def ==(other)
         self.class == other.class
       end
+
+      def pretty_print
+        _pretty_print(0)
+      end
+
+      def to_s
+        self.class.to_s.split('::').last
+      end
+
+      def _pretty_print(indent)
+        puts ' ' * indent + to_s
+      end
     end
 
     # A leaf node, e.g. one that has no children
     class LeafNode < Node
       def leaf?
         true
+      end
+
+      def _pretty_print(indent)
+        puts ' ' * indent + "#{self}:#{value}"
       end
     end
 
@@ -40,6 +56,11 @@ module Coeus
       def leaf?
         false
       end
+
+      def _pretty_print(indent)
+        super
+        child._pretty_print(indent + 2)
+      end
     end
 
     # A node with exactly 2 children
@@ -54,6 +75,12 @@ module Coeus
 
       def leaf?
         false
+      end
+
+      def _pretty_print(indent)
+        super
+        left._pretty_print(indent + 2)
+        right._pretty_print(indent + 2)
       end
     end
   end

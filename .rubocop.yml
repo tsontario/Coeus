@@ -18,6 +18,11 @@ Metrics/PerceivedComplexity:
   Enabled: false
 Metrics/ParameterLists:
   Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+
 
 Layout/SpaceBeforeBrackets: # (new in 1.7)
   Enabled: true

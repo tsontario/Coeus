@@ -10,6 +10,8 @@ module Coeus
   class ParseTree
     attr_reader :node
 
+    delegate :pretty_print, to: :node
+
     Error = Class.new(Coeus::Error)
 
     def initialize(node)
@@ -37,10 +39,10 @@ module Coeus
 
         ParseTree.new(node.child) == ParseTree.new(other.node.child)
       when BinaryNode
-        return false unless other.node.is_a?(BinaryMode)
+        return false unless other.node.is_a?(BinaryNode)
         return false unless node == other.node
 
-        ParseTree.new(node.left) == new(other.node.left) &&
+        ParseTree.new(node.left) == ParseTree.new(other.node.left) &&
           ParseTree.new(node.right) == ParseTree.new(other.node.right)
       else
         raise Error, "Unknown node class #{node.class}"
