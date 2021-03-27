@@ -10,5 +10,4 @@ require_relative 'coeus/language'
 
 # Entrypoint for library
 module Coeus
-
 end

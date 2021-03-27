@@ -19,9 +19,8 @@ module Coeus
         when 'AF'
           ParseTree::UniversalFuture(child: operand.value)
         when 'EF'
-          # TODO
+          translate_exists_future(operand)
         when 'AG'
-          # STILL TODO
           translate_universal_global(operand)
         when 'EG'
           translate_exists_global(operand)
@@ -61,8 +60,8 @@ module Coeus
 
       # P v Q == ~(~P ^ ~Q)
       def translate_or(left, right)
-        right_node = ParseTree::Not.new(child: right)
         left_node = ParseTree::Not.new(child: left)
+        right_node = ParseTree::Not.new(child: right)
         or_node = ParseTree::Or.new(left: left_node, right: right_node)
         ParseTree::Not.new(child: or_node)
       end
@@ -81,8 +80,16 @@ module Coeus
         ParseTree::Not.new(child: af_node)
       end
 
+      # EF(phi) = E(T u phi)
+      def translate_exists_future(child)
+        left_node = ParseTree::Not.new(child: ParseTree::False.new)
+        right_node = child
+        ParseTree::ExistsUntil.new(left: left_node, right: right_node)
+      end
+
+      # AG = NOT(EF(!phi))
       def translate_universal_global(child)
-        # TODO
+        ParseTree::Not.new(child: translate_exists_future(ParseTree::Not(child: child)))
       end
 
       def translate_universal_next(child)

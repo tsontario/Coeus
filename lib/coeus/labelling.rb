@@ -3,8 +3,8 @@
 module Coeus
   # A Labelling keeps track of the labels satisfied by a given formula for all states of a Model
   class Labelling
-    class Error = new Class(Coeus::Error
-    class SatNotRunError = new Class(Error)
+    Error = Class.new(Coeus::Error)
+    SatNotRunError = Class.new(Error)
 
     attr_reader :model, :result_set
 
@@ -54,7 +54,7 @@ module Coeus
     end
 
     def parse_results
-      raise SatNotRunError, "You must run the SAT algorithm before attempting to parse results" unless result_set
+      raise SatNotRunError, 'You must run the SAT algorithm before attempting to parse results' unless result_set
       # TODO: Result type of class (like a view type of thing). Can give a rundown of passing/failing nodes, etc.
     end
   end
