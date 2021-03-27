@@ -7,8 +7,10 @@ module Coeus
     # TranslationParser provides the parsing logic to translate CTL expressions into a Coeus::ParseTree
     # with the additional behaviour of converting expressions into equivalent forms that use an adequate set
     class TranslationParser < ParserBase
-      # We need to explicitly assign the rules to this class, Rly won't look up the ancestor chain, unfortunately
+      # We need to explicitly assign the rules and precedence rules to this class,
+      # Rly won't look up the ancestor chain, unfortunately
       self.rules = ParserBase.rules
+      self.prec_rules = ParserBase.prec_rules
 
       private
 

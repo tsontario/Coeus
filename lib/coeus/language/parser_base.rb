@@ -11,6 +11,7 @@ module Coeus
       precedence :left, :AND, :OR
       precedence :left, :IMPLIES, :AU, :EU
       precedence :right, :NOT, :AG, :EG, :AF, :EF, :AX, :EX
+      precedence :right, :UMINUS
 
       # Results are wrapped in a ParseTree object
       rule 'statement: expression' do |st, e|
@@ -31,8 +32,13 @@ module Coeus
       end
 
       # Unary operators
-      rule 'expression : NOT expression
-                       | AF expression
+
+      # The NOT operator should bind as tightly as possible to the next closest value
+      rule 'expression : NOT expression %prec NOT' do |ex, operator, operand|
+        ex.value = parse_unary(operator, operand)
+      end
+
+      rule 'expression : AF expression
                        | EF expression
                        | AG expression
                        | EG expression
