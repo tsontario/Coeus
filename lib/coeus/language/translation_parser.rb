@@ -16,18 +16,18 @@ module Coeus
         case operator.value
         when 'NOT'
           ParseTree::Not.new(child: operand.value)
-        when 'AF'
-          ParseTree::UniversalFuture(child: operand.value)
         when 'EF'
-          translate_exists_future(operand)
-        when 'AG'
-          translate_universal_global(operand)
+          translate_exists_future(operand.value)
         when 'EG'
-          translate_exists_global(operand)
-        when 'AX'
-          translate_universal_next(operand)
+          translate_exists_global(operand.value)
         when 'EX'
-          ParseTree::ExistsUntil(child: operand.value)
+          ParseTree::ExistsNext.new(child: operand.value)
+        when 'AF'
+          ParseTree::UniversalFuture.new(child: operand.value)
+        when 'AG'
+          translate_universal_global(operand.value)
+        when 'AX'
+          translate_universal_next(operand.value)
         else
           raise NotImplementedError, "#{operand.value} not translated to adequate set yet"
         end
@@ -56,6 +56,10 @@ module Coeus
 
       def parse_atomic(atom)
         ParseTree::Atomic.new(atom.value)
+      end
+
+      def parse_until()
+        #TODO args + body
       end
 
       # P v Q == ~(~P ^ ~Q)
@@ -89,7 +93,7 @@ module Coeus
 
       # AG = NOT(EF(!phi))
       def translate_universal_global(child)
-        ParseTree::Not.new(child: translate_exists_future(ParseTree::Not(child: child)))
+        ParseTree::Not.new(child: translate_exists_future(ParseTree::Not.new(child: child)))
       end
 
       def translate_universal_next(child)
