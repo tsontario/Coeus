@@ -10,6 +10,8 @@ module Coeus
   class ParseTree
     attr_reader :node
 
+    delegate :pretty_print, to: :node
+
     Error = Class.new(Coeus::Error)
 
     def initialize(node)

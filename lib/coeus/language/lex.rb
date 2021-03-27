@@ -34,8 +34,8 @@ module Coeus
       token :RIGHT_PAREN, /\)/
 
       # Boolean literals
-      token :TRUE, /TRUE/
-      token :FALSE, /FALSE/
+      token :TRUE, /TRUE/i
+      token :FALSE, /FALSE/i
 
       # E.g. 'p', 't1', 'c2' 'ttt', 't1s'...
       token :ATOM, /[a-zA-Z]\w*/

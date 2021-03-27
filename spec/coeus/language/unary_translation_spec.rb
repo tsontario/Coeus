@@ -19,7 +19,8 @@ describe Coeus::Language::TranslationParser do
         Coeus::ParseTree.new(
           Coeus::ParseTree::ExistsUntil.new(
             left: Coeus::ParseTree::Not.new(
-              child: Coeus::ParseTree::False.new),
+              child: Coeus::ParseTree::False.new
+            ),
             right: Coeus::ParseTree::Atomic.new('a')
           )
         )
@@ -33,7 +34,8 @@ describe Coeus::Language::TranslationParser do
           Coeus::ParseTree::Not.new(
             child: Coeus::ParseTree::ExistsUntil.new(
               left: Coeus::ParseTree::Not.new(
-                child: Coeus::ParseTree::False.new),
+                child: Coeus::ParseTree::False.new
+              ),
               right: Coeus::ParseTree::Not.new(
                 child: Coeus::ParseTree::Atomic.new('a')
               )

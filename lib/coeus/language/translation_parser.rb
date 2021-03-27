@@ -29,7 +29,7 @@ module Coeus
         when 'AX'
           translate_universal_next(operand.value)
         else
-          raise NotImplementedError, "#{operand.value} not translated to adequate set yet"
+          raise NotImplementedError
         end
       end
 
@@ -47,7 +47,7 @@ module Coeus
       end
 
       def parse_boolean(bool)
-        if bool.value == 'False'
+        if bool.value.match(/false/i)
           ParseTree::False.new
         else
           ParseTree::Not.new(child: ParseTree::False.new)
@@ -58,16 +58,23 @@ module Coeus
         ParseTree::Atomic.new(atom.value)
       end
 
-      def parse_until()
-        #TODO args + body
+      def parse_until(qualifier, left, right)
+        case qualifier.value
+        when 'E'
+          ParseTree::ExistsUntil.new(left: left.value, right: right.value)
+        when 'A'
+          translate_universal_until(left, right)
+        else
+          raise NotImplementedError
+        end
       end
 
       # P v Q == ~(~P ^ ~Q)
       def translate_or(left, right)
-        left_node = ParseTree::Not.new(child: left)
-        right_node = ParseTree::Not.new(child: right)
-        or_node = ParseTree::Or.new(left: left_node, right: right_node)
-        ParseTree::Not.new(child: or_node)
+        left_node = ParseTree::Not.new(child: left.value)
+        right_node = ParseTree::Not.new(child: right.value)
+        and_node = ParseTree::And.new(left: left_node, right: right_node)
+        ParseTree::Not.new(child: and_node)
       end
 
       # P -> Q == ~(P ^ ~Q)
@@ -79,7 +86,7 @@ module Coeus
 
       # EG(~P) == ~AF(P)
       def translate_exists_global(child)
-        inner_not_node = ParseTree::Not.new(child: child)
+        inner_not_node = ParseTree::Not.new(child: as_node(child))
         af_node = ParseTree::UniversalFuture.new(child: inner_not_node)
         ParseTree::Not.new(child: af_node)
       end
@@ -87,19 +94,55 @@ module Coeus
       # EF(phi) = E(T u phi)
       def translate_exists_future(child)
         left_node = ParseTree::Not.new(child: ParseTree::False.new)
-        right_node = child
+        right_node = as_node(child)
         ParseTree::ExistsUntil.new(left: left_node, right: right_node)
       end
 
-      # AG = NOT(EF(!phi))
+      # AG = ~(EF(~phi))
       def translate_universal_global(child)
-        ParseTree::Not.new(child: translate_exists_future(ParseTree::Not.new(child: child)))
+        ParseTree::Not.new(
+          child: ParseTree::ExistsUntil.new(
+            left: ParseTree::Not.new(child: ParseTree::False.new),
+            right: ParseTree::Not.new(child: as_node(child))
+          )
+        )
       end
 
+      # AX = ~EX(~phi)
       def translate_universal_next(child)
         inner_not = ParseTree::Not.new(child: child)
         ex_node = ParseTree::ExistsNext.new(child: inner_not)
         ParseTree::Not.new(child: ex_node)
+      end
+
+      # A[a U b] = ~(E[~b U (~a AND ~b)] OR EG(~b))
+      def translate_universal_until(left, right)
+        ParseTree::And.new(
+          left: ParseTree::Not.new(
+            child: ParseTree::ExistsUntil.new(
+              left: ParseTree::Not.new(
+                child: as_node(right)
+              ),
+              right: ParseTree::And.new(
+                left: ParseTree::Not.new(
+                  child: as_node(left)
+                ),
+                right: ParseTree::Not.new(
+                  child: as_node(right)
+                )
+              )
+            )
+          ),
+          right: ParseTree::UniversalFuture.new(
+            child: as_node(right)
+          )
+        )
+      end
+
+      # prefer this to directly using #value, since we may forward racc expressions between translation methods we
+      # can't be certain if the argument will be in the form of a ParseTree::Node or still as a parser object
+      def as_node(symbol_or_node)
+        symbol_or_node.is_a?(ParseTree::Node) ? symbol_or_node : symbol_or_node.value
       end
     end
   end
