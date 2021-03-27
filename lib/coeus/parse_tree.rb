@@ -17,8 +17,8 @@ module Coeus
     end
 
     def sat(labelling)
+      # The result of node.sat(labelling) will be only those states that satisfy the entire parse tree expression
       node.sat(labelling)
-      # Now we need to check if all states actually are labelled with @node (the head of this parse tree)
     end
 
     def ==(other)
