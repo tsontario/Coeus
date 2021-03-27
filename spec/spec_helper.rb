@@ -2,6 +2,7 @@
 
 require 'yaml'
 require 'byebug'
+require_relative File.join('support', 'helpers', 'parser.rb')
 require_relative 'test_helper'
 $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
 require 'coeus'
@@ -103,4 +104,5 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+  config.include Helpers::Parser
 end

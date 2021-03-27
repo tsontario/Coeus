@@ -21,4 +21,8 @@ module TestHelper
       to: states.select { |s| yaml['to'].include?(s.name) }
     )
   end
+
+  def self.parser(parser: Language::TranslationParser)
+    @parser ||= parser.new(Language::CTLLex.new)
+  end
 end
