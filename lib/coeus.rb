@@ -8,6 +8,5 @@ require_relative 'coeus/labelling'
 require_relative 'coeus/parse_tree'
 require_relative 'coeus/language'
 
-# Entrypoint for library
 module Coeus
 end

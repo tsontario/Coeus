@@ -11,7 +11,6 @@ module Coeus
       precedence :left, :AND, :OR
       precedence :left, :IMPLIES, :AU, :EU
       precedence :right, :NOT, :AG, :EG, :AF, :EF, :AX, :EX
-      precedence :right, :UMINUS
 
       # Results are wrapped in a ParseTree object
       rule 'statement: expression' do |st, e|

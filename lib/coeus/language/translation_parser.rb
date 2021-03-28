@@ -117,7 +117,7 @@ module Coeus
         ParseTree::Not.new(child: ex_node)
       end
 
-      # A[a U b] = ~(E[~b U (~a AND ~b)] OR EG(~b))
+      # A[a U b] = (~E[~b U (~a AND ~b)] AND AF(b))
       def translate_universal_until(left, right)
         ParseTree::And.new(
           left: ParseTree::Not.new(
