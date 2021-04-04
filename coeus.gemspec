@@ -5,6 +5,7 @@ Gem::Specification.new do |spec|
   spec.version       = Coeus::VERSION
   spec.authors       = ['Timothy Smith']
   spec.email         = ["tsontario@gmail.com"]
+  spec.license       = "MIT"
 
   spec.summary       = %q{ CTL model checker, including expression parser }
   spec.description   = %q{ CTL model checker, expression parser. Determines satisfaction of CTL expression using a labelling algorithm }
