@@ -5,10 +5,11 @@ require 'rgl/adjacency'
 
 module Coeus
   module Labellings
+    # TODO set as private inner class
     class Vertex
-      attr_reader :color
-      def initialize(name, color)
-        @name = name
+      attr_reader :color, :label
+      def initialize(label, color)
+        @label = label
         @color = color
       end
     end
@@ -27,18 +28,27 @@ module Coeus
           new(dg)
         end
       end
-      # TODO remove
-      attr_reader :graph
-
+      
       def initialize(graph)
         @graph = graph
       end
-
+      
       def draw!
-        dg.write_to_graphic_file('png', 'graph', 'vertex' => { 'color' => Proc.new do |v|
-          v.color
-        end})
+        graph.write_to_graphic_file('png', 'graph', 'vertex' => vertex_procs)
       end
+      
+      # vertex_procs returns the default styling options for each kind of vertex. options can be passed in
+      # to add new or override existing entries. Due to the nature of the graph drawing library, values must
+      # be passed in as Proc objects, with the provided argument assumed to be a vertex
+      def vertex_procs(options={})
+        {
+          'label' => Proc.new { |v| v.label },
+          'color' => Proc.new { |v| v.color }
+        }.merge(options)
+      end
+
+      private
+      attr_reader :graph
     end
   end
 end

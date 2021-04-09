@@ -15,6 +15,6 @@
       expect(results.unsatisfied_states.map(&:name)).to eq(["s0", "s4", "s5", "s6", "s7"])
 
       graph = Coeus::Labellings::Graph.from_results(results)
-      graph.graph.write_to_graphic_file('png', 'graph', 'vertex' => { 'color' => Proc.new { |v| v.color }})
+      graph.draw!
     end
   end
