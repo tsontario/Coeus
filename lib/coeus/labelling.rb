@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require_relative 'labellings/results'
 
 module Coeus
   # A Labelling keeps track of the labels satisfied by a given formula for all states of a Model
@@ -36,7 +37,6 @@ module Coeus
 
     def initialize(model)
       @model = model
-      @sat_has_run = false
     end
 
     def state_labellings
@@ -48,14 +48,20 @@ module Coeus
     end
 
     def sat(tree)
+      # Maintain a reference to the parse tree
+      @tree = tree
       # Always reset state_labellings so we can run different formulae on a given instance
       @state_labellings = model.states.each_with_object({}) { |state, acc| acc[state.name] = StateLabels.new(state) }
       @result_set = tree.sat(self)
     end
 
-    def parse_results
-      raise SatNotRunError, 'You must run the SAT algorithm before attempting to parse results' unless result_set
-      # TODO: Result type of class (like a view type of thing). Can give a rundown of passing/failing nodes, etc.
+    def partition_results
+      raise SatNotRunError, 'You must run the SAT algorithm before attempting to parse results' unless result_set.present?
+      satisfied, unsatisfied = state_labellings.partition { |labelling| labelling.labels.present? }
     end
+
+    private
+    
+    attr_reader :tree, :result_set
   end
 end
