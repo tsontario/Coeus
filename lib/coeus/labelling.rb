@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require_relative 'labellings/results'
+require_relative 'labellings/graph'
 
 module Coeus
   # A Labelling keeps track of the labels satisfied by a given formula for all states of a Model

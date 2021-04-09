@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/all'
+require 'rgl/base'
 
 require_relative 'coeus/error'
 require_relative 'coeus/model'

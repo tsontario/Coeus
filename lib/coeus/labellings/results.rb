@@ -28,7 +28,13 @@ module Coeus
       end
 
       def draw_results
-        raise NotImplementedError, 'TODO'
+        # Plan:
+        # - Create a node entry for satisfied and unsatisfied states, in turn
+        # - Apply styling depending on whether the given state is satisfied or not
+        # - At the same time, declare the edges between states
+
+        # So I need a directed, possibly-cyclic, graph
+        
       end
     end
   end

@@ -1,0 +1,161 @@
+digraph RGL__DirectedAdjacencyGraph {
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3ad98>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3ad98>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3ad20>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3ad20>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3abb8>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3abb8>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3aaf0>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3aaf0>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a9d8>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a9d8>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a910>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a910>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a7f8>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a7f8>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a780>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a780>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a668>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a668>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a5c8>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a5c8>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a4b0>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a4b0>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a438>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a438>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a320>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a320>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a2a8>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a2a8>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a168>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a168>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a0c8>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a0c8>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe39fb0>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe39fb0>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe39f38>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe39f38>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe39e20>" [
+        color = blue,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe39e20>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe39d80>" [
+        color = red,
+        fontsize = 8,
+        label = "#<Coeus::Labellings::Vertex:0x00007f9ddbe39d80>"
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3ad98>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe3ad20>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3abb8>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe3aaf0>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a9d8>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a910>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a7f8>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a780>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a668>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a5c8>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a4b0>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a438>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a320>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a2a8>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a168>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe3a0c8>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe39fb0>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe39f38>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Vertex:0x00007f9ddbe39e20>" -> "#<Coeus::Labellings::Vertex:0x00007f9ddbe39d80>" [
+        fontsize = 8
+    ]
+}
