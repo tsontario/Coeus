@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require_relative 'labellings/results'
 require_relative 'labellings/graph'
 
 module Coeus
@@ -14,6 +13,7 @@ module Coeus
     # StateLabels is a storage container for keeping track of satisfied formula(e) for the associated state
     class StateLabels
       attr_reader :state
+      attr_accessor :satisfied
 
       delegate :name, :transitions_from, :transitions_to, to: :state
 
@@ -34,6 +34,15 @@ module Coeus
       def has_label?(label)
         labels.include?(label)
       end
+
+      def satisfied
+        @satisfied
+      end
+
+      def satisfied=(bool)
+        @satisfied = bool
+      end
+
     end
 
     def initialize(model)
@@ -49,20 +58,15 @@ module Coeus
     end
 
     def sat(tree)
-      # Maintain a reference to the parse tree
-      @tree = tree
       # Always reset state_labellings so we can run different formulae on a given instance
       @state_labellings = model.states.each_with_object({}) { |state, acc| acc[state.name] = StateLabels.new(state) }
-      @result_set = tree.sat(self)
-    end
+      
+      # This will update StateLabel objects!
+      tree.sat(self)
 
-    def partition_results
-      raise SatNotRunError, 'You must run the SAT algorithm before attempting to parse results' unless result_set.present?
-      satisfied, unsatisfied = state_labellings.partition { |labelling| labelling.labels.present? }
+      # A state satisfies the given expression if it remains labelled after running the sat algorithm
+      state_labellings.each { |labelling| labelling.satisfied = labelling.labels.present? }
     end
-
-    private
-    
-    attr_reader :tree, :result_set
+  
   end
 end

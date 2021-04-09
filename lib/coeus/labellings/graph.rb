@@ -5,28 +5,55 @@ require 'rgl/adjacency'
 
 module Coeus
   module Labellings
-    # TODO set as private inner class
-    class Vertex
-      attr_reader :color, :label
-      def initialize(label, color)
-        @label = label
-        @color = color
-      end
-    end
-
     # A thin wrapper class around RGL and the 'dot' tool to generate picture of graphs
     class Graph
+      # TODO set as private inner class
+      class Vertex
+        attr_reader :color, :label, :hash_key
+
+        class << self
+          def from_labelling(state_label)
+            color = state_label.satisfied ? 'green' : 'red'
+            label = state_label
+            new(label, color)
+          end
+        end
+
+        def initialize(label, color)
+          @hash_key = label.name
+          @label = html_label(label)
+          @color = color
+        end  
+
+        private
+
+        def html_label(state_label)
+          """<
+          <TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"4\" BGCOLOR=\"lightgrey\">
+          <TR><TD><FONT POINT-SIZE=\"20.0\">#{state_label.name}</FONT></TD></TR>
+          <TR><TD>#{state_label.state.atoms.map(&:value).join(', ')}</TD></TR>
+          </TABLE>
+          >"""
+        end      
+      end # End vertex inner class
+
       class << self
         private_class_method :new
-        def from_results(results)
+        def from_labelling(labelling)
           dg = RGL::DirectedAdjacencyGraph.new
-          1.upto(10) do |i|
-            a = Vertex.new('a' + i.to_s, 'blue')
-            b = Vertex.new('b' + i.to_s, 'red')
-            dg.add_edge(a, b)
+          vertex_dict = {}
+          # Add states
+          labelling.state_labellings.each do |state_label|
+            from = Vertex.from_labelling(state_label)
+            vertex_dict[from.hash_key] ||= from
+            state_label.transitions_from.each do |to_label|
+              to = Vertex.from_labelling(labelling.for(to_label.name))
+              vertex_dict[to.hash_key] ||= to
+              dg.add_edge(vertex_dict[from.hash_key], vertex_dict[to.hash_key])
+            end
           end
           new(dg)
-        end
+        end # End Graph metaclass
       end
       
       def initialize(graph)
@@ -43,7 +70,9 @@ module Coeus
       def vertex_procs(options={})
         {
           'label' => Proc.new { |v| v.label },
-          'color' => Proc.new { |v| v.color }
+          'style' => Proc.new { |v| 'filled' },
+          'color' => Proc.new { |v| v.color },
+          # 'fillcolor' => Proc.new { |v| v.color }
         }.merge(options)
       end
 
