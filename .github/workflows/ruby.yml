@@ -29,7 +29,7 @@ jobs:
     # uses: ruby/setup-ruby@v1
       uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
       env:
-        BUNDLE_WITHOUT: graph
+        BUNDLE_WITHOUT: ci_skip
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
