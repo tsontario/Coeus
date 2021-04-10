@@ -32,15 +32,15 @@ module Coeus
       when LeafNode
         return false unless other.node.is_a?(LeafNode)
 
-        node == other.node
+        node.tree_compare(other.node)
       when UnaryNode
         return false unless other.node.is_a?(UnaryNode)
-        return false unless node == other.node
+        return false unless node.tree_compare(other.node)
 
-        ParseTree.new(node.child) == ParseTree.new(other.node.child)
+        ParseTree.new(node.child) == (ParseTree.new(other.node.child))
       when BinaryNode
         return false unless other.node.is_a?(BinaryNode)
-        return false unless node == other.node
+        return false unless node.tree_compare(other.node)
 
         ParseTree.new(node.left) == ParseTree.new(other.node.left) &&
           ParseTree.new(node.right) == ParseTree.new(other.node.right)

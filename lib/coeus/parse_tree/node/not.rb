@@ -8,19 +8,16 @@ module Coeus
         child.sat(labelling)
         labelled = []
         labelling.state_labellings.each do |state_labelling|
-          if child.is_a?(BinaryNode)
-            if state_labelling.has_label?(child)
-              state_labelling.add_label(self)
-              labelled << state_labelling
-            end
-          else
-            unless state_labelling.has_label?(child)
-              state_labelling.add_label(self)
-              labelled << state_labelling
-            end
+          unless state_labelling.has_label?(child)
+            state_labelling.add_label(self)
+            labelled << state_labelling
           end
         end
         labelled
+      end
+
+      def ==(other)
+        self.object_id == other.object_id
       end
     end
   end

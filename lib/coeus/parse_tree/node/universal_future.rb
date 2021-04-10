@@ -38,6 +38,10 @@ module Coeus
         end
         labelled
       end
+
+      def ==(other)
+        self.object_id == other.object_id
+      end
     end
   end
 end

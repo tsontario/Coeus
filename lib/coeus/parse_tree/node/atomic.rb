@@ -25,6 +25,10 @@ module Coeus
       def ==(other)
         self.class == other.class && value == other.value
       end
+
+      def tree_compare(other)
+        self == other
+      end
     end
   end
 end

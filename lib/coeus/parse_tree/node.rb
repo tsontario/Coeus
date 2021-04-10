@@ -17,7 +17,7 @@ module Coeus
       end
 
       def ==(other)
-        self.class == other.class
+        raise NotImplementedError
       end
 
       def pretty_print
@@ -30,6 +30,13 @@ module Coeus
 
       def _pretty_print(indent)
         puts ' ' * indent + to_s
+      end
+
+      # Comparing at the tree level is different than comparing at the node level (such as when running sat)
+      # In the latter case, it is important to keep track of the individual object (via ID, e.g.). However,
+      # at the tree level, we need to use a coarser idea of equality
+      def tree_compare(other)
+        raise NotImplementedError
       end
     end
 
@@ -61,6 +68,10 @@ module Coeus
         super
         child._pretty_print(indent + 2)
       end
+
+      def tree_compare(other)
+        self.class == other.class
+      end
     end
 
     # A node with exactly 2 children
@@ -81,6 +92,14 @@ module Coeus
         super
         left._pretty_print(indent + 2)
         right._pretty_print(indent + 2)
+      end
+
+      def ==(other)
+        self.class == other.class
+      end
+
+      def tree_compare(other)
+        self.class == other.class
       end
     end
   end
