@@ -7,7 +7,8 @@ module Coeus
   module Labellings
     # A thin wrapper class around RGL and the 'dot' tool to generate picture of graphs
     class Graph
-      # TODO set as private inner class
+      attr_accessor :title
+      # Private inner class
       class Vertex
         attr_reader :color, :label, :hash_key
 
@@ -27,6 +28,7 @@ module Coeus
 
         private
 
+        # State name on top, predicate values listed on bottom
         def html_label(state_label)
           """<
           <TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"4\" BGCOLOR=\"lightgrey\">
@@ -36,6 +38,7 @@ module Coeus
           >"""
         end      
       end # End vertex inner class
+      private_constant :Vertex
 
       class << self
         private_class_method :new
@@ -72,7 +75,9 @@ module Coeus
       end
       
       def default_graph_options
-        {}
+        options = {}
+        options['label'] = title if title
+        options
       end
 
       # vertex_procs returns the default styling options for each kind of vertex. options can be passed in

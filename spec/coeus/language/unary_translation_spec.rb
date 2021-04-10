@@ -7,7 +7,7 @@ describe Coeus::Language::TranslationParser do
       expect(parsed).to eq(
         Coeus::ParseTree.new(
           Coeus::ParseTree::Not.new(
-            child: Coeus::ParseTree::Atomic.new('a')
+            child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
           )
         )
       )
@@ -21,7 +21,7 @@ describe Coeus::Language::TranslationParser do
             left: Coeus::ParseTree::Not.new(
               child: Coeus::ParseTree::False.new
             ),
-            right: Coeus::ParseTree::Atomic.new('a')
+            right: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
           )
         )
       )
@@ -37,7 +37,7 @@ describe Coeus::Language::TranslationParser do
                 child: Coeus::ParseTree::False.new
               ),
               right: Coeus::ParseTree::Not.new(
-                child: Coeus::ParseTree::Atomic.new('a')
+                child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
               )
             )
           )
@@ -52,7 +52,7 @@ describe Coeus::Language::TranslationParser do
           Coeus::ParseTree::Not.new(
             child: Coeus::ParseTree::UniversalFuture.new(
               child: Coeus::ParseTree::Not.new(
-                child: Coeus::ParseTree::Atomic.new('a')
+                child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
               )
             )
           )
@@ -65,7 +65,7 @@ describe Coeus::Language::TranslationParser do
       expect(parsed).to eq(
         Coeus::ParseTree.new(
           Coeus::ParseTree::UniversalFuture.new(
-            child: Coeus::ParseTree::Atomic.new('a')
+            child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
           )
         )
       )
@@ -78,7 +78,7 @@ describe Coeus::Language::TranslationParser do
           Coeus::ParseTree::Not.new(
             child: Coeus::ParseTree::ExistsNext.new(
               child: Coeus::ParseTree::Not.new(
-                child: Coeus::ParseTree::Atomic.new('a')
+                child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
               )
             )
           )
@@ -91,7 +91,7 @@ describe Coeus::Language::TranslationParser do
       expect(parsed).to eq(
         Coeus::ParseTree.new(
           Coeus::ParseTree::ExistsNext.new(
-            child: Coeus::ParseTree::Atomic.new('a')
+            child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
           )
         )
       )

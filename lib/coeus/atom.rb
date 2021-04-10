@@ -10,7 +10,7 @@ module Coeus
       @value = value
     end
 
-    # TODO: test
+
     def <=>(other)
       value <=> other.value
     end

@@ -64,9 +64,8 @@ module Coeus
       
       # This will update StateLabel objects!
       tree.sat(self)
-
       # A state satisfies the given expression if it remains labelled after running the sat algorithm
-      state_labellings.each { |labelling| labelling.satisfied = labelling.labels.present? }
+      state_labellings.each { |labelling| labelling.satisfied = labelling.labels.include?(tree.node) }
     end
   
   end

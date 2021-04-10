@@ -182,8 +182,6 @@ describe Coeus::Labelling do
       expectations.each do |state, nodes|
         expect(labelling.for(state).labels).to contain_exactly(*nodes)
       end
-      graph = Coeus::Labellings::Graph.from_labelling(labelling)
-      graph.draw!
     end
 
     it 'labels the same as other test with AND T E [!c2 U c1]' do
@@ -237,6 +235,8 @@ describe Coeus::Labelling do
       expectations.each do |state, nodes|
         expect(labelling.for(state).labels).to contain_exactly(*nodes)
       end
+      graph = Coeus::Labellings::Graph.from_labelling(labelling)
+      graph.draw!
     end
   end
 end

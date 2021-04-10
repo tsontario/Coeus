@@ -8,9 +8,9 @@ describe Coeus::Language::TranslationParser do
         Coeus::ParseTree.new(
           Coeus::ParseTree::And.new(
             left: Coeus::ParseTree::Not.new(
-              child: Coeus::ParseTree::Atomic.new('a')
+              child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
             ),
-            right: Coeus::ParseTree::Atomic.new('b')
+            right: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
           )
         )
       )
@@ -22,8 +22,8 @@ describe Coeus::Language::TranslationParser do
         Coeus::ParseTree.new(
           Coeus::ParseTree::Not.new(
             child: Coeus::ParseTree::And.new(
-              left: Coeus::ParseTree::Atomic.new('a'),
-              right: Coeus::ParseTree::Atomic.new('b')
+              left: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a')),
+              right: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
             )
           )
         )

@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'yaml'
+require 'byebug'
+
+require_relative '../lib/coeus'
+
+def load_model(filename)
+  contents = if filename == '-'
+    STDIN.read
+  else
+    File.read(filename)
+  end
+  Coeus::Model.from_yaml(YAML.load(contents))
+end
+
+def parse_expression(expression)
+  parser = Coeus::Language::TranslationParser.new(Coeus::Language::CTLLex.new)
+  parser.parse(expression)
+end
+
+# Script start
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: coeus -fFILENAME [options] EXPRESSION"
+  opts.on('-f', '--filename=FILENAME', "CTL model YAML file (pass '-' to read from STDIN)") do |f|
+    options[:filename] = f
+  end
+  opts.on('-v', '--[no-]verbose', 'Run with verbose logs') do |v|
+    options[:verbose] = v
+  end
+end.parse!
+
+logger = Logger.new(options[:verbose] ? STDOUT : STDERR)
+
+ctl_expression = ARGV[0]
+raise "CTL expression must be passed in as argument" unless ctl_expression
+
+logger.info('generating parse tree from expression')
+parse_tree = parse_expression(ctl_expression)
+
+logger.info("loading model...")
+model = load_model(options[:filename])
+labelling = Coeus::Labelling.new(model)
+
+logger.info('running labelling algorithm')
+labelling.sat(parse_tree)
+
+logger.info('generating graph...')
+graph = Coeus::Labellings::Graph.from_labelling(labelling)
+graph.title = ctl_expression
+graph.draw!
+logger.info("drew graph to #{File.join(Dir.pwd, 'graph.png')}")

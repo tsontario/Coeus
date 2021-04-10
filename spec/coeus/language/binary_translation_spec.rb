@@ -7,8 +7,8 @@ describe Coeus::Language::TranslationParser do
       expect(parsed).to eq(
         Coeus::ParseTree.new(
           Coeus::ParseTree::And.new(
-            left: Coeus::ParseTree::Atomic.new('a'),
-            right: Coeus::ParseTree::Atomic.new('b')
+            left: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a')),
+            right: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
           )
         )
       )
@@ -21,10 +21,10 @@ describe Coeus::Language::TranslationParser do
           Coeus::ParseTree::Not.new(
             child: Coeus::ParseTree::And.new(
               left: Coeus::ParseTree::Not.new(
-                child: Coeus::ParseTree::Atomic.new('a')
+                child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
               ),
               right: Coeus::ParseTree::Not.new(
-                child: Coeus::ParseTree::Atomic.new('b')
+                child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
               )
             )
           )
@@ -38,9 +38,9 @@ describe Coeus::Language::TranslationParser do
         Coeus::ParseTree.new(
           Coeus::ParseTree::Not.new(
             child: Coeus::ParseTree::And.new(
-              left: Coeus::ParseTree::Atomic.new('a'),
+              left: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a')),
               right: Coeus::ParseTree::Not.new(
-                child: Coeus::ParseTree::Atomic.new('b')
+                child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
               )
             )
           )
@@ -53,8 +53,8 @@ describe Coeus::Language::TranslationParser do
       expect(parsed).to eq(
         Coeus::ParseTree.new(
           Coeus::ParseTree::ExistsUntil.new(
-            left: Coeus::ParseTree::Atomic.new('a'),
-            right: Coeus::ParseTree::Atomic.new('b')
+            left: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a')),
+            right: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
           )
         )
       )
@@ -68,20 +68,20 @@ describe Coeus::Language::TranslationParser do
             left: Coeus::ParseTree::Not.new(
               child: Coeus::ParseTree::ExistsUntil.new(
                 left: Coeus::ParseTree::Not.new(
-                  child: Coeus::ParseTree::Atomic.new('b')
+                  child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
                 ),
                 right: Coeus::ParseTree::And.new(
                   left: Coeus::ParseTree::Not.new(
-                    child: Coeus::ParseTree::Atomic.new('a')
+                    child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
                   ),
                   right: Coeus::ParseTree::Not.new(
-                    child: Coeus::ParseTree::Atomic.new('b')
+                    child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
                   )
                 )
               )
             ),
             right: Coeus::ParseTree::UniversalFuture.new(
-              child: Coeus::ParseTree::Atomic.new('b')
+              child: Coeus::ParseTree::Atomic.new(Coeus::Atom.new('b'))
             )
           )
         )

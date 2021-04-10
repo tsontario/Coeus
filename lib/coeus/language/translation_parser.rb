@@ -57,7 +57,7 @@ module Coeus
       end
 
       def parse_atomic(atom)
-        ParseTree::Atomic.new(atom.value)
+        ParseTree::Atomic.new(Coeus::Atom.new(atom.value))
       end
 
       def parse_until(qualifier, left, right)

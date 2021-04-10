@@ -6,7 +6,7 @@ describe Coeus::Language::TranslationParser do
       parsed = parser.parse('a')
       expect(parsed).to eq(
         Coeus::ParseTree.new(
-          Coeus::ParseTree::Atomic.new('a')
+          Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
         )
       )
     end
@@ -15,7 +15,7 @@ describe Coeus::Language::TranslationParser do
       parsed = parser.parse('abc123')
       expect(parsed).to eq(
         Coeus::ParseTree.new(
-          Coeus::ParseTree::Atomic.new('abc123')
+          Coeus::ParseTree::Atomic.new(Coeus::Atom.new('abc123'))
         )
       )
     end
