@@ -116,9 +116,9 @@ describe Coeus::Labelling do
       s0_labelling = labelling.for('s0')
       s1_labelling = labelling.for('s1')
       s2_labelling = labelling.for('s2')
-      expect(s0_labelling.labels).to contain_exactly(a_node, not_node)
-      expect(s1_labelling.labels).to contain_exactly(b_node, not_node)
-      expect(s2_labelling.labels).to contain_exactly(a_node, b_node, and_node)
+      expect(s0_labelling.labels).to contain_exactly(a_node)
+      expect(s1_labelling.labels).to contain_exactly(b_node)
+      expect(s2_labelling.labels).to contain_exactly(not_node, a_node, b_node, and_node)
     end
   end
 
@@ -235,8 +235,6 @@ describe Coeus::Labelling do
       expectations.each do |state, nodes|
         expect(labelling.for(state).labels).to contain_exactly(*nodes)
       end
-      graph = Coeus::Labellings::Graph.from_labelling(labelling)
-      graph.draw!
     end
   end
 end

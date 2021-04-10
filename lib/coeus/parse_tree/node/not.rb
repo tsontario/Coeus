@@ -6,12 +6,18 @@ module Coeus
     class Not < UnaryNode
       def sat(labelling)
         child.sat(labelling)
-
         labelled = []
         labelling.state_labellings.each do |state_labelling|
-          unless state_labelling.has_label?(child)
-            state_labelling.add_label(self)
-            labelled << state_labelling
+          if child.is_a?(BinaryNode)
+            if state_labelling.has_label?(child)
+              state_labelling.add_label(self)
+              labelled << state_labelling
+            end
+          else
+            unless state_labelling.has_label?(child)
+              state_labelling.add_label(self)
+              labelled << state_labelling
+            end
           end
         end
         labelled
