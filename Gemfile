@@ -22,6 +22,6 @@ gem 'rake', '~> 13.0'
 
 gem "rgl", "~> 0.5.7"
 
-gem "tk", "~> 0.4.0"
+gem "tk", "~> 0.4.0", require: false
 
-gem "graphviz", "~> 1.2"
+gem "graphviz", "~> 1.2", require: false
