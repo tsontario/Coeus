@@ -20,7 +20,7 @@ gem 'rly', '~> 0.2.3'
 
 gem 'rake', '~> 13.0'
 
-group :development, :production do
+group :graph do
   # We don't need graph drawing code in CI (in fact, it can't load the TK native libraries anyway)
   gem "rgl", "~> 0.5.7"
   gem "tk", "~> 0.4.0"
