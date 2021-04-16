@@ -61,7 +61,7 @@ module Coeus
       @tree = tree
       # Always reset state_labellings so we can run different formulae on a given instance
       @state_labellings = model.states.each_with_object({}) { |state, acc| acc[state.name] = StateLabels.new(state) }
-      
+
       # This will update StateLabel objects!
       tree.sat(self)
 

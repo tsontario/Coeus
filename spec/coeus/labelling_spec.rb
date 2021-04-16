@@ -207,6 +207,7 @@ describe Coeus::Labelling do
         's7' => [c2_node, true_node],
         's8' => [not_node, true_node]
       }
+
       expectations.each do |state, nodes|
         expect(labelling.for(state).labels).to contain_exactly(*nodes)
       end
@@ -232,9 +233,6 @@ describe Coeus::Labelling do
         's6' => [],
         's7' => []
       }
-      graph = Coeus::Labellings::Graph.from_labelling(labelling)
-
-graph.draw!
       expectations.each do |state, nodes|
         expect(labelling.for(state).labels).to contain_exactly(*nodes)
       end

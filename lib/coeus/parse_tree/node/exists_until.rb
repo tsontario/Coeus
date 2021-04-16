@@ -34,7 +34,7 @@ module Coeus
               next
             end
 
-            next unless from_state_labelling.has_label?(left) && model.transitions_for(from_state).any? do |to_state|
+            next unless from_state_labelling.has_label?(left) && model.transitions_for(from_state)&.any? do |to_state|
                           labelling.for(to_state.name).has_label?(self)
                         end
 
