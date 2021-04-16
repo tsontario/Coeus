@@ -49,7 +49,7 @@ module Coeus
           labelling.state_labellings.each do |state_label|
             from = Vertex.from_labelling(state_label)
             vertex_dict[from.hash_key] ||= from
-            state_label.transitions_from.each do |to_label|
+            state_label.transitions_to&.each do |to_label|
               to = Vertex.from_labelling(labelling.for(to_label.name))
               vertex_dict[to.hash_key] ||= to
               dg.add_edge(vertex_dict[from.hash_key], vertex_dict[to.hash_key])

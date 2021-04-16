@@ -8,35 +8,24 @@ module Coeus
         child_sat = child.sat(labelling)
 
         labelled = []
-        child_sat.each do |state_labelling|
-          state_labelling.add_label(self)
-          labelled << state_labelling
-        end
-
-        candidates = child_sat.flat_map do |state_labelling|
-          state_labelling.transitions_from.map(&:labelling)
-        end
-
+        y = child_sat.dup
         loop do
-          changes_made = false
-          next_candidates = []
-          candidates.each do |from_state|
-            if from_state.has_label?(self)
-              candidates -= [from_state]
-              next
+          x = y.dup
+          y.each do |child_labelling|
+            child_labelling.transitions_from&.each do |incoming_state|
+              if incoming_state.transitions_to&.all? { |outgoing_state| labelling.for(outgoing_state.name).has_label?(child) }
+                labelled_incoming = labelling.for(incoming_state.name)
+                y <<  labelled_incoming unless y.include?(labelled_incoming)
+              end
             end
-
-            next unless from_state.transitions_to.map(&:labelling).all? { |to_state| to_state.has_label?(self) }
-
-            from_state.add_label(self)
-            labelled << from_state
-            (next_candidates += from_state.transitions_from.map(&:labelling)).uniq
-            changes_made = true
           end
-          candidates = next_candidates
-          break unless changes_made
+          break if x == y
         end
-        labelled
+
+        y.each do |state_labelling|
+          state_labelling.add_label(self)
+        end
+        y
       end
 
       def ==(other)

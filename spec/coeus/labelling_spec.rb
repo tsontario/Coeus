@@ -218,20 +218,23 @@ describe Coeus::Labelling do
       yaml = YAML.load_file("#{TestHelper.fixture_path}/universal_future_test.yaml")
       model = Coeus::Model.from_yaml(yaml)
       labelling = described_class.new(model)
-      c1_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
-      universal_future_node = Coeus::ParseTree::UniversalFuture.new(child: c1_node)
+      a_node = Coeus::ParseTree::Atomic.new(Coeus::Atom.new('a'))
+      universal_future_node = Coeus::ParseTree::UniversalFuture.new(child: a_node)
       parse_tree = Coeus::ParseTree.new(universal_future_node)
       labelling.sat(parse_tree)
       expectations = {
         's0' => [],
         's1' => [universal_future_node],
-        's2' => [universal_future_node, c1_node],
-        's3' => [universal_future_node, c1_node],
+        's2' => [universal_future_node, a_node],
+        's3' => [universal_future_node, a_node],
         's4' => [],
         's5' => [],
         's6' => [],
         's7' => []
       }
+      graph = Coeus::Labellings::Graph.from_labelling(labelling)
+
+graph.draw!
       expectations.each do |state, nodes|
         expect(labelling.for(state).labels).to contain_exactly(*nodes)
       end

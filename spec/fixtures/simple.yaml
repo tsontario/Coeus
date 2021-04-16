@@ -12,4 +12,4 @@ transitions:
       - s1
   - from: s1
     to:
-      - s0
+      - s1
