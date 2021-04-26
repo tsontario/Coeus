@@ -10,6 +10,8 @@ Coeus is a Computation Tree Logic (CTL) model checker. In particular, it support
 
 # Quickstart
 
+Note: you need to have Ruby installed for this application. Run `bundle install` in the application directory to load all dependencies.
+
 Coeus provides a small commandline utility that can be invoked by `bin/coeus` (use `-h` flag for help).
 Example:
 
