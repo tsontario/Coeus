@@ -19,6 +19,8 @@ Example:
 bin/coeus -f input/model.yaml -o output_graph_path "a OR E[TRUE U (NOT b OR c)]"
 ```
 
+There are a number of model YAML files in `example` as well as `spec/fixtures` if you want to play around with them.
+
 ## Expression Syntax
 
 The CTL expression passed into Coeus is defined in `lib/coeus/language/lex.rb`. Atomic predicates can be any lowercase alphanumeric string (must begin with a letter). Some example expressions are:
