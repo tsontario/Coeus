@@ -70,7 +70,7 @@ module Coeus
       end
 
       def tree_compare(other)
-        self.class == other.class
+        instance_of?(other.class)
       end
     end
 
@@ -99,7 +99,7 @@ module Coeus
       end
 
       def tree_compare(other)
-        self.class == other.class
+        instance_of?(other.class)
       end
     end
   end

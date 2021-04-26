@@ -34,5 +34,12 @@ module Coeus
         atoms.sort == other.atoms.sort &&
         initial_state? == other.initial_state?
     end
+
+    def encode_with(coder)
+      coder.tag = nil
+      coder['name'] = name
+      coder['initial'] = true if initial_state?
+      coder['atoms'] = (atoms || []).map(&:value)
+    end
   end
 end

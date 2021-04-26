@@ -1,0 +1,119 @@
+digraph RGL__DirectedAdjacencyGraph {
+    label = "example/universal_future_unlabelled"
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa6b0>" [
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s0</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa5e8>" [
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s1</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa408>" [
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s3</FONT></TD></TR>
+          <TR><TD>a</TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa2f0>" [
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s5</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa138>" [
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s2</FONT></TD></TR>
+          <TR><TD>a</TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eea9ee0>" [
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s4</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eea9c88>" [
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s6</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eea9ad0>" [
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s7</FONT></TD></TR>
+          <TR><TD>b</TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa6b0>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa5e8>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa6b0>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa408>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa6b0>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa2f0>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa5e8>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa138>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa408>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eea9ee0>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eeaa2f0>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eea9c88>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eea9c88>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007fc33eea9ad0>" [
+        fontsize = 8
+    ]
+}

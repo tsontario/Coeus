@@ -81,12 +81,12 @@ module Coeus
 
       # P -> Q == ~(P ^ ~Q)
       def translate_implies(left, right)
-        right_node = ParseTree::Not.new(child: right.value)
-        and_node = ParseTree::And.new(left: left.value, right: right_node)
+        right_node = ParseTree::Not.new(child: as_node(right))
+        and_node = ParseTree::And.new(left: as_node(left), right: right_node)
         ParseTree::Not.new(child: and_node)
       end
 
-      # EG(~P) == ~AF(P)
+      # EG(P) == ~AF(~P)
       def translate_exists_global(child)
         inner_not_node = ParseTree::Not.new(child: as_node(child))
         af_node = ParseTree::UniversalFuture.new(child: inner_not_node)

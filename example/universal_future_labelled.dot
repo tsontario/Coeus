@@ -1,0 +1,127 @@
+digraph RGL__DirectedAdjacencyGraph {
+    label = "AF a"
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922d95a0>" [
+        color = red,
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s0</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922d9028>" [
+        color = green,
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s1</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922e3d70>" [
+        color = green,
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s3</FONT></TD></TR>
+          <TR><TD>a</TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922e3af0>" [
+        color = red,
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s5</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a92317058>" [
+        color = green,
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s2</FONT></TD></TR>
+          <TR><TD>a</TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a92316950>" [
+        color = red,
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s4</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a92316040>" [
+        color = red,
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s6</FONT></TD></TR>
+          <TR><TD></TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a92315c30>" [
+        color = red,
+        fontsize = 8,
+        style = filled,
+        label = <
+          <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" BGCOLOR="lightgrey">
+          <TR><TD><FONT POINT-SIZE="20.0">s7</FONT></TD></TR>
+          <TR><TD>b</TD></TR>
+          </TABLE>
+          >
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922d95a0>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922d9028>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922d95a0>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922e3d70>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922d95a0>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922e3af0>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922d9028>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007f8a92317058>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922e3d70>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007f8a92316950>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a922e3af0>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007f8a92316040>" [
+        fontsize = 8
+    ]
+
+    "#<Coeus::Labellings::Graph::Vertex:0x00007f8a92316040>" -> "#<Coeus::Labellings::Graph::Vertex:0x00007f8a92315c30>" [
+        fontsize = 8
+    ]
+}

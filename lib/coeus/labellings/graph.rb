@@ -8,6 +8,7 @@ module Coeus
     # A thin wrapper class around RGL and the 'dot' tool to generate picture of graphs
     class Graph
       attr_accessor :title
+
       # Private inner class
       class Vertex
         attr_reader :color, :label, :hash_key
@@ -16,28 +17,33 @@ module Coeus
           def from_labelling(state_label)
             color = state_label.satisfied ? 'green' : 'red'
             label = state_label
-            new(label, color)
+            new(label.state, color)
+          end
+
+          def from_state(state)
+            label = state
+            new(label, nil)
           end
         end
 
-        def initialize(label, color)
-          @hash_key = label.name
-          @label = html_label(label)
+        def initialize(state, color)
+          @hash_key = state.name
+          @label = html_label(state)
           @color = color
-        end  
+        end
 
         private
 
         # State name on top, predicate values listed on bottom
-        def html_label(state_label)
-          """<
+        def html_label(state)
+          "<
           <TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"4\" BGCOLOR=\"lightgrey\">
-          <TR><TD><FONT POINT-SIZE=\"20.0\">#{state_label.name}</FONT></TD></TR>
-          <TR><TD>#{state_label.state.atoms.map(&:value).join(', ')}</TD></TR>
+          <TR><TD><FONT POINT-SIZE=\"20.0\">#{state.name}</FONT></TD></TR>
+          <TR><TD>#{state.atoms.map(&:value).join(', ')}</TD></TR>
           </TABLE>
-          >"""
-        end      
-      end # End vertex inner class
+          >"
+        end
+      end
       private_constant :Vertex
 
       class << self
@@ -56,27 +62,49 @@ module Coeus
             end
           end
           new(dg)
-        end # End Graph metaclass
+        end
+
+        def from_model(model)
+          dg = RGL::DirectedAdjacencyGraph.new
+          vertex_dict = {}
+          # Add states
+          model.states.each do |state|
+            from = Vertex.from_state(state)
+            vertex_dict[from.hash_key] ||= from
+            state.transitions_to&.each do |to_state|
+              to = Vertex.from_state(to_state)
+              vertex_dict[to.hash_key] ||= to
+              dg.add_edge(vertex_dict[from.hash_key], vertex_dict[to.hash_key])
+            end
+          end
+          new(dg)
+        end
       end
-      
+
       def initialize(graph)
         @graph = graph
       end
-      
-      def draw!(graph_options: {}, vertex_options: {})
-        options = {}
+
+      def draw!(outfile, graph_options: {}, vertex_options: {})
         options = default_graph_options.merge(graph_options)
         options['vertex'] = default_vertex_options.merge(vertex_options)
         graph.write_to_graphic_file(
           'png',
-          'graph',
+          outfile,
           options
         )
       end
-      
+
+      def draw_basic!(outfile)
+        options = {}
+        options['vertex'] = { 'label' => proc { |v| v.label } }
+        graph.write_to_graphic_file('png', outfile, options)
+      end
+
       def default_graph_options
         options = {}
         options['label'] = title if title
+        options['rankdir'] = '"LR"'
         options
       end
 
@@ -85,13 +113,14 @@ module Coeus
       # be passed in as Proc objects, with the provided argument assumed to be a vertex
       def default_vertex_options
         {
-          'label' => Proc.new { |v| v.label },
-          'style' => Proc.new { |v| 'filled' },
-          'color' => Proc.new { |v| v.color }
+          'label' => proc { |v| v.label },
+          'style' => proc { |_v| 'filled' },
+          'color' => proc { |v| v.color }
         }
       end
 
       private
+
       attr_reader :graph
     end
   end

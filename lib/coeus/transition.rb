@@ -32,5 +32,11 @@ module Coeus
     def each(&block)
       @to.each(&block)
     end
+
+    def encode_with(coder)
+      coder.tag = nil
+      coder['from'] = from.name
+      coder['to'] = to.map(&:name)
+    end
   end
 end

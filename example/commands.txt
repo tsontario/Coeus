@@ -1,0 +1,9 @@
+# Unlabelled AF a graph
+bundle exec bin/coeus --filename=example/demo_universal_future.yaml --outfile=example/universal_future_unlabelled -b
+# Labellel AF a graph
+bundle exec bin/coeus --filename=example/demo_universal_future.yaml --outfile=example/universal_future_labelled "AF a"
+
+# Unlabelled mutex
+bundle exec bin/coeus --filename=example/demo_mutex.yaml --outfile=example/mutex_unlabelled -b
+# Labelled mutex
+bundle exec bin/coeus --filename=example/demo_mutex.yaml --outfile=example/mutex_labelled  "E [(NOT c2) U c1]"

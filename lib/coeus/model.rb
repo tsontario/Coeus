@@ -37,5 +37,11 @@ module Coeus
     def transitions_for(state)
       transitions.detect { |transition_list| transition_list.from == state }
     end
+
+    def encode_with(coder)
+      coder.tag = nil
+      coder['states'] = states
+      coder['transitions'] = transitions
+    end
   end
 end

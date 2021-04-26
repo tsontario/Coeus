@@ -117,7 +117,7 @@ describe Coeus::Labelling do
       s1_labelling = labelling.for('s1')
       s2_labelling = labelling.for('s2')
       expect(s0_labelling.labels).to contain_exactly(not_node, a_node)
-      expect(s1_labelling.labels).to contain_exactly(not_node,b_node)
+      expect(s1_labelling.labels).to contain_exactly(not_node, b_node)
       expect(s2_labelling.labels).to contain_exactly(a_node, b_node, and_node)
     end
   end

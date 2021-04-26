@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'optparse'
 require 'yaml'
@@ -8,39 +9,61 @@ require_relative '../lib/coeus'
 
 def load_model(filename)
   contents = if filename == '-'
-    STDIN.read
-  else
-    File.read(filename)
-  end
-  Coeus::Model.from_yaml(YAML.load(contents))
+               $stdin.read
+             else
+               File.read(filename)
+             end
+  Coeus::Model.from_yaml(YAML.safe_load(contents))
 end
 
 def parse_expression(expression)
   parser = Coeus::Language::TranslationParser.new(Coeus::Language::CTLLex.new)
-  parser.parse(expression)
+  parsed = parser.parse(expression)
+  raise "failed to parse expression #{expression}" unless parsed.is_a?(Coeus::ParseTree)
+
+  parsed
 end
 
 # Script start
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: coeus -fFILENAME [options] EXPRESSION"
+  opts.banner = 'Usage: coeus -fFILENAME [options] EXPRESSION'
   opts.on('-f', '--filename=FILENAME', "CTL model YAML file (pass '-' to read from STDIN)") do |f|
     options[:filename] = f
+  end
+  opts.on('-o', '--outfile=FILENAME', 'basename of generated graph file') do |f|
+    options[:outfile] = f
+  end
+  opts.on('-b', '--basic', 'set this flag to generate unlabelled graphs') do |_b|
+    options[:basic_graph] = true
   end
   opts.on('-v', '--[no-]verbose', 'Run with verbose logs') do |v|
     options[:verbose] = v
   end
 end.parse!
 
-logger = Logger.new(options[:verbose] ? STDOUT : STDERR)
+logger = Logger.new(options[:verbose] ? $stdout : $stderr)
+
+if options[:basic_graph]
+  outfile = options[:outfile] || 'graph'
+  logger.info('generating basic graph...')
+  logger.info('loading model...')
+  model = load_model(options[:filename])
+  graph = Coeus::Labellings::Graph.from_model(model)
+  graph.title = outfile
+  graph.draw!(outfile)
+  logger.info("drew basic graph to #{File.join(Dir.pwd, "#{outfile}.png")}")
+  exit(0)
+end
 
 ctl_expression = ARGV[0]
-raise "CTL expression must be passed in as argument" unless ctl_expression
+raise 'CTL expression must be passed in as argument' unless ctl_expression
 
 logger.info('generating parse tree from expression')
 parse_tree = parse_expression(ctl_expression)
+parse_tree.pretty_print
 
-logger.info("loading model...")
+logger.info('loading model...')
 model = load_model(options[:filename])
 labelling = Coeus::Labelling.new(model)
 
@@ -48,7 +71,9 @@ logger.info('running labelling algorithm')
 labelling.sat(parse_tree)
 
 logger.info('generating graph...')
+outfile = options[:outfile] || 'graph'
+
 graph = Coeus::Labellings::Graph.from_labelling(labelling)
 graph.title = ctl_expression
-graph.draw!
-logger.info("drew graph to #{File.join(Dir.pwd, 'graph.png')}")
+graph.draw!(outfile)
+logger.info("drew graph to #{File.join(Dir.pwd, "#{outfile}.png")}")

@@ -9,7 +9,7 @@ module Coeus
       end
 
       def ==(other)
-        self.object_id == other.object_id
+        equal?(other)
       end
 
       def value
@@ -17,7 +17,7 @@ module Coeus
       end
 
       def tree_compare(other)
-        self.class == other.class
+        instance_of?(other.class)
       end
     end
   end

@@ -8,6 +8,23 @@ Coeus is a Computation Tree Logic (CTL) model checker. In particular, it support
 - Parse CTL expression strings
 - Evaluate CTL expressions against a model
 
+# Quickstart
+
+Coeus provides a small commandline utility that can be invoked by `bin/coeus` (use `-h` flag for help).
+Example:
+
+```bash
+bin/coeus -f input/model.yaml -o output_graph_path "a OR E[TRUE U (NOT b OR c)]"
+```
+
+## Expression Syntax
+
+The CTL expression passed into Coeus is defined in `lib/coeus/language/lex.rb`. Atomic predicates can be any lowercase alphanumeric string (must begin with a letter). Some example expressions are:
+
+- `a OR b`
+- `EU [TRUE U NOT c1] AND (c -> d)`
+- `NOT FALSE and EX (a AND b AND c)`
+
 # Architecture
 
 Coeus is comprised of 3 key components, the Model, CTL expression parser, and the Labelling algorithm

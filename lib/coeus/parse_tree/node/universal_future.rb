@@ -7,15 +7,14 @@ module Coeus
       def sat(labelling)
         child_sat = child.sat(labelling)
 
-        labelled = []
         y = child_sat.dup
         loop do
           x = y.dup
           y.each do |child_labelling|
             child_labelling.transitions_from&.each do |incoming_state|
-              if incoming_state.transitions_to&.all? { |outgoing_state| labelling.for(outgoing_state.name).has_label?(child) }
+              if incoming_state.transitions_to&.all? { |outgoing_state| y.map(&:name).include?(outgoing_state.name) }
                 labelled_incoming = labelling.for(incoming_state.name)
-                y <<  labelled_incoming unless y.include?(labelled_incoming)
+                y << labelled_incoming unless y.include?(labelled_incoming)
               end
             end
           end
@@ -29,7 +28,7 @@ module Coeus
       end
 
       def ==(other)
-        self.object_id == other.object_id
+        equal?(other)
       end
     end
   end

@@ -16,7 +16,7 @@ module Coeus
       end
 
       def ==(other)
-        self.object_id == other.object_id
+        equal?(other)
       end
     end
   end

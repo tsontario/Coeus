@@ -1,0 +1,37 @@
+states:
+  - name: s0
+    atoms: []
+    initial: true
+  - name: s1
+    atoms:
+      - a
+  - name: s2
+    atoms:
+      - a
+  - name: s3
+    atoms: []
+    initial: true
+  - name: s4
+    atoms:
+      - a
+  - name: s5
+    atoms: []
+transitions:
+  - from: s0
+    to:
+      - s1
+      - s2
+  - from: s1
+    to:
+      - s1
+  - from: s2
+    to: s2
+  - from: s3
+    to:
+      - s4
+      - s5
+  - from: s4
+    to:
+      - s4
+  - from: s5
+    to: s5

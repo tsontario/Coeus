@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'labellings/graph'
 
 module Coeus
@@ -12,8 +13,8 @@ module Coeus
     delegate :states, to: :model
     # StateLabels is a storage container for keeping track of satisfied formula(e) for the associated state
     class StateLabels
-      attr_reader :state, :tree
       attr_accessor :satisfied
+      attr_reader :state, :tree
 
       delegate :name, :transitions_from, :transitions_to, to: :state
 
@@ -34,15 +35,6 @@ module Coeus
       def has_label?(label)
         labels.include?(label)
       end
-
-      def satisfied
-        @satisfied
-      end
-
-      def satisfied=(bool)
-        @satisfied = bool
-      end
-
     end
 
     def initialize(model)
@@ -70,6 +62,5 @@ module Coeus
         labelling.satisfied = labelling.labels.include?(tree.node)
       end
     end
-  
   end
 end
