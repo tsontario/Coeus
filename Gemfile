@@ -10,7 +10,7 @@ gem 'activesupport', '~> 6.1'
 
 gem 'rspec', '~> 3.10'
 
-gem 'rubocop', '~> 1.12'
+gem 'rubocop', '~> 1.28'
 
 gem 'byebug', '~> 11.1'
 
