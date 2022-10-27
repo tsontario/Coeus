@@ -8,7 +8,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 gem 'activesupport', '~> 6.1'
 
-gem 'rspec', '~> 3.10'
+gem 'rspec', '~> 3.12'
 
 gem 'rubocop', '~> 1.12'
 
